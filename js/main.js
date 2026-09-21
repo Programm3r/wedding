@@ -397,6 +397,15 @@
     });
   }
 
+  /* ---------- Shared photo album ---------- */
+  function initPhotos() {
+    const link = $("#albumLink");
+    const pending = $("#albumPending");
+    if (!link) return;
+    if (W.photosUrl) { link.href = W.photosUrl; }
+    else { link.hidden = true; pending.hidden = false; }
+  }
+
   /* ---------- FAQ smooth accordion ---------- */
   function initFaq() {
     $$(".faq__item").forEach((item) => {
@@ -590,5 +599,6 @@
   initTilt();
   initVenue();
   initFaq();
+  initPhotos();
   initRsvp();
 })();

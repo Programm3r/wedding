@@ -10,7 +10,7 @@ window.WEDDING = {
   // true  : the full site opens, and a "Full details & RSVP" button appears on
   //         the landing page.
   // Preview the full site yourself while it is false: wedding.html?preview=1
-  siteLive: true,
+  siteLive: false,
 
   // The couple
   partner1: "Richard Bailey",

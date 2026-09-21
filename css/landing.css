@@ -1,0 +1,106 @@
+/* ==========================================================================
+   Landing page (index.html) — the envelope opens onto the save-the-date.
+   Loaded after css/styles.css, which supplies the theme, envelope, hero,
+   buttons, footer and animations. Only the extras live here.
+   ========================================================================== */
+
+/* ---------- The weekend, front and centre ---------- */
+.hero__badge {
+  margin: 0.2rem 0 1.8rem;
+  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--on-dark);
+}
+.hero__badge span {
+  display: inline-block;
+  padding: 8px 20px;
+  border: 1px solid color-mix(in srgb, var(--accent-light) 55%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.hero__dates {
+  display: flex; justify-content: center; align-items: stretch;
+  gap: clamp(8px, 1.6vw, 16px);
+}
+.hero__day {
+  flex: 0 1 clamp(96px, 20vw, 160px);
+  padding: clamp(12px, 2vw, 20px) clamp(6px, 1.4vw, 14px);
+  border: 1px solid var(--line-dark);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--on-dark) 4%, transparent);
+}
+.hero__day--main {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 18px 40px -22px #000;
+}
+.hero__day-name {
+  display: block;
+  font-size: 0.64rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--leaf-light);
+}
+.hero__day--main .hero__day-name { color: color-mix(in srgb, var(--on-dark) 85%, transparent); }
+.hero__day-num {
+  display: block;
+  font-family: var(--serif); font-weight: 500;
+  font-size: clamp(2.1rem, 5.4vw, 3.2rem); line-height: 1.1;
+  margin: 0.15rem 0 0.25rem;
+}
+.hero__day-note {
+  display: block;
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(0.82rem, 1.8vw, 1rem);
+  color: color-mix(in srgb, var(--on-dark) 72%, transparent);
+}
+.hero__day--main .hero__day-note { color: var(--on-dark); }
+.hero__month {
+  margin: 1rem 0 0;
+  font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase;
+  color: color-mix(in srgb, var(--on-dark) 75%, transparent);
+}
+.hero__venue { margin: 1.5rem 0 0; line-height: 1.5; }
+.hero__venue-name { display: block; font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 3vw, 1.7rem); }
+.hero__venue-area { display: block; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: color-mix(in srgb, var(--on-dark) 65%, transparent); margin-top: 0.35rem; }
+
+/* The landing hero has no navigation bar above it */
+.landing .hero { padding: 90px 20px 100px; }
+.landing .hero__frame { inset: clamp(14px, 3vw, 36px); }
+
+/* ---------- Three days in the bush ---------- */
+.three-days { background: var(--paper); padding: clamp(80px, 12vw, 130px) 0; position: relative; }
+.three-days__head { text-align: center; margin-bottom: clamp(48px, 7vw, 70px); }
+.three-days__head .sprig { margin-inline: auto; }
+.three-days__head .lead { margin-inline: auto; }
+
+.days { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+.days li { position: relative; padding: 0 clamp(16px, 2.6vw, 38px); text-align: center; }
+.days li + li { border-left: 1px solid var(--line); }
+.days__name { display: block; font-family: var(--serif); font-style: italic; font-size: clamp(1.7rem, 3.4vw, 2.2rem); color: var(--ink); line-height: 1.2; }
+.days__date { display: block; font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--leaf); margin: 0.9rem 0 1rem; }
+.days__date::before { /* small rule between the day and its date */
+  content: ""; display: block;
+  width: 26px; height: 1px; margin: 0 auto 0.9rem;
+  background: var(--accent);
+}
+.days p { margin: 0; color: var(--muted); font-size: 0.99rem; }
+
+.note {
+  max-width: 660px;
+  margin: clamp(56px, 8vw, 80px) auto 0;
+  padding: clamp(28px, 4vw, 42px);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.note p { margin: 0; color: var(--muted); }
+.note strong { color: var(--ink); font-weight: 500; }
+.note__small { margin-top: 0.8rem !important; font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
+
+@media (max-width: 760px) {
+  .days { grid-template-columns: 1fr; gap: 34px; }
+  .days li + li { border-left: 0; border-top: 1px solid var(--line); padding-top: 32px; }
+  .hero__badge { font-size: 0.6rem; letter-spacing: 0.22em; }
+  .hero__badge span { padding: 7px 14px; }
+  .countdown { margin: 2rem 0 2.2rem; }
+}

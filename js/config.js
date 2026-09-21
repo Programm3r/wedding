@@ -4,10 +4,11 @@
    ========================================================================== */
 window.WEDDING = {
   // ── THE SWITCH ────────────────────────────────────────────────────────────
-  // false : visitors see the "more information to follow" holding page, and the
-  //         full site (wedding.html) bounces them back to it. Use this until the
-  //         formal invitations go out.
-  // true  : the full site opens, and the holding page forwards straight to it.
+  // false : guests see only the landing page (envelope + save the date). Anyone
+  //         who finds wedding.html is sent back to it. Use this until the formal
+  //         invitations go out.
+  // true  : the full site opens, and a "Full details & RSVP" button appears on
+  //         the landing page.
   // Preview the full site yourself while it is false: wedding.html?preview=1
   siteLive: false,
 
@@ -22,6 +23,12 @@ window.WEDDING = {
   endDate: "2027-08-15T01:00:00+02:00",
   dateLong: "Saturday, 14 August 2027",
   rsvpDeadline: "14 May 2027",
+
+  // The weekend, used by the landing page and its "add to calendar" button
+  weekendStart: "2027-08-13T14:00:00+02:00", // Friday, guests arrive
+  weddingDay: "2027-08-14T15:30:00+02:00",   // Saturday, the ceremony (drives the countdown)
+  weekendEnd: "2027-08-15T10:00:00+02:00",   // Sunday, check-out
+  dateLine: "Friday 13 – Sunday 15 August 2027",
 
   // Venue
   venue: {

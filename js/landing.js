@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Save the Date — interactions
+   Landing page — envelope intro, countdown, add-to-calendar.
+   Settings come from js/config.js, the same file the full site uses.
    ========================================================================== */
 (function () {
   "use strict";
@@ -36,6 +37,10 @@
     });
     document.title = `${W.partner1} & ${W.partner2} · Save the Date · 14 August 2027`;
     $("#venueSite").href = W.venue.website;
+
+    // The link through to the full site appears only once siteLive is true
+    const full = $("#fullSite");
+    if (full && W.siteLive) full.hidden = false;
 
     if (W.heroImage) {
       const bg = $("#heroBg");

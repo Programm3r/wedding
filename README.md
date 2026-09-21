@@ -1,34 +1,47 @@
 # Richard & Gisela — 13–15 August 2027 · Kuthaba Bush Lodge
 
-Two sites live here, sharing the same stationery:
+Two pages, one set of stationery:
 
-| File / folder | What it is | Who sees it now |
+| File | What it is | Who sees it now |
 |---|---|---|
-| `index.html` | Holding page: names, dates and "more information to follow", with a link to the save the date. | Anyone who visits the bare domain |
-| `save-the-date/` | **Send this link now.** The envelope opens, then names, date, countdown and the Friday-to-Sunday weekend. No RSVP. | Your guests |
-| `wedding.html` | The full wedding website: story, order of the day, venue and map, accommodation, gallery, FAQ and the RSVP form. | Nobody yet — it redirects to the holding page |
+| `index.html` | **The landing page, and the link you send.** The sealed envelope opens onto the save the date: names, the Friday-to-Sunday weekend, the countdown and "add to calendar". No RSVP. | Your guests |
+| `wedding.html` | The full wedding website: story, order of the day, venue and map, accommodation, gallery, FAQ and the RSVP form. | Nobody yet — it sends visitors back to the landing page |
+
+Guests who open the domain get the envelope straight away. The envelope is skipped on
+later visits in the same browser session, so a refresh goes directly to the page.
 
 ## Opening the full site
 
 One switch controls it — `siteLive` at the top of **`js/config.js`**:
 
-- `siteLive: false` (now) — visitors to the domain get the holding page, and anyone who guesses
+- `siteLive: false` (now) — guests see only the landing page, and anyone who guesses
   `wedding.html` is sent back to it.
-- `siteLive: true` (when the invitations go out) — the full site opens, and the holding page
-  forwards straight to it. Nothing else to change.
+- `siteLive: true` (when the invitations go out) — the full site opens, and a
+  **Full details & RSVP** button appears on the landing page. Nothing else to change.
 
 To check the full site yourself while it is still hidden, open **`wedding.html?preview=1`**.
 
 Note this is a courtesy screen, not a lock: the page's own source is still downloadable by anyone
 determined. Don't put anything genuinely private (like home addresses) on it before it goes live.
 
-Everything is plain HTML/CSS/JavaScript with no build step. Open either `index.html` in a browser to preview it.
+Everything is plain HTML/CSS/JavaScript with no build step. Open `index.html` in a browser to preview it.
 
 ## The weekend
 
 Guests arrive **Friday 13 August**, the wedding is **Saturday 14 August**, and everyone leaves after
-breakfast on **Sunday 15 August**. Both sites say so, and the "add to calendar" button on the
-save-the-date page books the whole weekend.
+breakfast on **Sunday 15 August**. Both pages say so, and the landing page's "add to calendar"
+button books the whole weekend (Friday 2:00 pm to Sunday 10:00 am — change `weekendStart` /
+`weekendEnd` in `js/config.js`).
+
+## Which file is which
+
+| File | Used by |
+|---|---|
+| `js/config.js` | Both pages — every setting lives here |
+| `css/styles.css` | Both pages — theme colours, envelope, hero, footer |
+| `css/landing.css` | The landing page only — the three-day strip and weekend section |
+| `js/landing.js` | The landing page only |
+| `js/main.js`, `js/gallery.js` | The full site only |
 
 ## Personalise it
 
@@ -90,8 +103,11 @@ Each response then lands as a row in the **RSVPs** tab of your sheet.
 
 The site is static, so any free host works:
 
-- **Netlify Drop**: drag the project folder onto <https://app.netlify.com/drop>.
-- **GitHub Pages**, **Cloudflare Pages** or **Vercel** also work.
+It is already on GitHub Pages at <https://twoshotsofbaileys.com>, served from the repo root of
+`Programm3r/wedding`. Push to `master` and the site updates itself.
+
+Netlify Drop, Cloudflare Pages and Vercel work the same way if you ever move it: they publish
+this folder as-is.
 
 ## Venue facts used
 

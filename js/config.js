@@ -9,7 +9,7 @@ window.WEDDING = {
   //         formal invitations go out.
   // true  : the full site opens, and the holding page forwards straight to it.
   // Preview the full site yourself while it is false: wedding.html?preview=1
-  siteLive: true,
+  siteLive: false,
 
   // The couple
   partner1: "Richard Bailey",

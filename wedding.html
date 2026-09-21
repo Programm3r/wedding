@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Save the Date · 14 August 2027</title>
+  <meta name="description" content="Save the date and RSVP for our wedding on 14 August 2027 at Kuthaba Bush Lodge in the Waterberg, South Africa." />
+  <meta name="theme-color" content="#1C2B4A" />
+  <meta property="og:title" content="Save the Date · 14 August 2027" />
+  <meta property="og:description" content="Join us at Kuthaba Bush Lodge in the Waterberg, South Africa." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%237B1E2F'/%3E%3Cpath d='M32 46s-14-8.5-14-18a8 8 0 0 1 14-5.3A8 8 0 0 1 46 28c0 9.5-14 18-14 18z' fill='%23fff'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/config.js"></script>
+  <script>
+    // Not live yet? Send visitors to the holding page before anything renders.
+    // Add ?preview=1 to the address to look at the full site yourself.
+    (function () {
+      var live = window.WEDDING && window.WEDDING.siteLive;
+      if (!live && !/[?&]preview=1/.test(location.search)) {
+        location.replace("./");
+      }
+    })();
+
+    // Apply the colour theme before the page paints (?theme=merlot previews one)
+    (function () {
+      var q = new URLSearchParams(location.search).get("theme");
+      var t = q || (window.WEDDING && window.WEDDING.theme) || "waterberg";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body class="is-locked">
+
+  <!-- Reusable botanical artwork -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="leaf" viewBox="0 0 40 80">
+        <path d="M20 2C34 18 38 44 20 78 2 44 6 18 20 2z" />
+        <path d="M20 8v66" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2" />
+      </symbol>
+      <symbol id="branch" viewBox="0 0 200 420">
+        <path d="M100 420C96 320 110 220 98 110 94 70 100 36 108 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+        <g fill="currentColor">
+          <ellipse cx="72" cy="360" rx="12" ry="30" transform="rotate(-50 72 360)" />
+          <ellipse cx="128" cy="330" rx="12" ry="30" transform="rotate(48 128 330)" />
+          <ellipse cx="74" cy="290" rx="11" ry="28" transform="rotate(-48 74 290)" />
+          <ellipse cx="126" cy="258" rx="11" ry="28" transform="rotate(50 126 258)" />
+          <ellipse cx="76" cy="220" rx="10" ry="26" transform="rotate(-46 76 220)" />
+          <ellipse cx="122" cy="186" rx="10" ry="25" transform="rotate(50 122 186)" />
+          <ellipse cx="78" cy="152" rx="9" ry="23" transform="rotate(-44 78 152)" />
+          <ellipse cx="120" cy="118" rx="9" ry="22" transform="rotate(48 120 118)" />
+          <ellipse cx="86" cy="84" rx="8" ry="20" transform="rotate(-40 86 84)" />
+          <ellipse cx="118" cy="52" rx="7" ry="18" transform="rotate(44 118 52)" />
+          <ellipse cx="108" cy="10" rx="6" ry="14" />
+        </g>
+      </symbol>
+      <symbol id="sprig" viewBox="0 0 120 24">
+        <path d="M2 12h116" stroke="currentColor" stroke-width="1" />
+        <g fill="currentColor">
+          <ellipse cx="44" cy="7" rx="7" ry="3" transform="rotate(-25 44 7)" />
+          <ellipse cx="44" cy="17" rx="7" ry="3" transform="rotate(25 44 17)" />
+          <ellipse cx="76" cy="7" rx="7" ry="3" transform="rotate(25 76 7)" />
+          <ellipse cx="76" cy="17" rx="7" ry="3" transform="rotate(-25 76 17)" />
+          <circle cx="60" cy="12" r="3.2" />
+        </g>
+      </symbol>
+      <!-- Wax seal (used twice: the halves split along the flap edge when opened) -->
+      <radialGradient id="waxBody" cx=".36" cy=".3" r=".8">
+        <stop offset="0" stop-color="#b5465a" />
+        <stop offset=".45" stop-color="#8c2437" />
+        <stop offset="1" stop-color="#561020" />
+      </radialGradient>
+      <!-- Lit from the opposite side so the centre reads as pressed in -->
+      <radialGradient id="waxPress" cx=".64" cy=".7" r=".75">
+        <stop offset="0" stop-color="#9e3043" />
+        <stop offset=".6" stop-color="#781b2c" />
+        <stop offset="1" stop-color="#5a1323" />
+      </radialGradient>
+      <radialGradient id="waxShine" cx=".5" cy=".5" r=".5">
+        <stop offset="0" stop-color="#fff" stop-opacity=".38" />
+        <stop offset="1" stop-color="#fff" stop-opacity="0" />
+      </radialGradient>
+      <symbol id="seal" viewBox="0 0 120 120">
+        <!-- Poured wax with an uneven edge -->
+        <path fill="url(#waxBody)" d="M111.1 60.0C110.1 66.0 108.4 71.2 106.7 77.0C105.1 82.8 104.4 89.6 101.1 94.5C97.9 99.5 92.4 103.9 87.0 106.8C81.7 109.7 75.2 111.4 69.2 112.0C63.2 112.6 56.7 112.2 51.1 110.6C45.5 109.0 40.7 105.2 35.5 102.4C30.3 99.6 23.3 98.1 19.7 93.8C16.2 89.5 16.1 82.3 14.1 76.7C12.2 71.1 8.1 65.6 8.0 60.0C8.0 54.4 12.2 49.0 13.9 43.2C15.6 37.4 15.1 29.8 18.5 25.1C21.8 20.5 28.7 18.3 34.1 15.1C39.4 11.8 44.7 6.4 50.4 5.7C56.2 5.1 62.8 9.5 68.6 11.3C74.4 13.0 79.7 14.1 85.1 16.5C90.5 18.8 96.4 21.5 101.0 25.6C105.6 29.7 111.0 35.1 112.7 40.8C114.4 46.6 112.1 54.0 111.1 60.0Z" />
+        <!-- Raised rim squeezed up by the stamp -->
+        <circle cx="60" cy="60" r="42" fill="none" stroke="#6b1627" stroke-width="5" />
+        <circle cx="59" cy="59" r="44.2" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="1.2" />
+        <!-- Stamped face -->
+        <circle cx="60" cy="60" r="39" fill="url(#waxPress)" />
+        <circle cx="60.8" cy="60.8" r="38.3" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1.6" />
+        <circle cx="60" cy="60" r="33.5" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="0.1 4.35" />
+        <circle cx="60" cy="60" r="29.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width=".8" />
+        <g fill="#fff" fill-opacity=".85">
+          <path d="M60 36.5l1.8 2.4-1.8 2.4-1.8-2.4z" />
+          <ellipse cx="51.5" cy="80.5" rx="3.4" ry="1.3" transform="rotate(-22 51.5 80.5)" />
+          <ellipse cx="45.5" cy="77.2" rx="3" ry="1.2" transform="rotate(-40 45.5 77.2)" />
+          <ellipse cx="68.5" cy="80.5" rx="3.4" ry="1.3" transform="rotate(22 68.5 80.5)" />
+          <ellipse cx="74.5" cy="77.2" rx="3" ry="1.2" transform="rotate(40 74.5 77.2)" />
+          <circle cx="60" cy="82" r="1.4" />
+        </g>
+        <ellipse cx="38" cy="29" rx="16" ry="8" fill="url(#waxShine)" transform="rotate(-35 38 29)" />
+      </symbol>
+    </defs>
+  </svg>
+
+  <!-- ============ Envelope intro ============ -->
+  <div class="intro" id="intro" role="dialog" aria-label="Invitation">
+    <svg class="intro__sprig intro__sprig--a" aria-hidden="true"><use href="#branch" /></svg>
+    <svg class="intro__sprig intro__sprig--b" aria-hidden="true"><use href="#branch" /></svg>
+    <div class="intro__inner">
+      <p class="intro__eyebrow">You are invited</p>
+      <button class="envelope" id="envelope" type="button" aria-label="Open the invitation">
+        <span class="envelope__body">
+          <span class="envelope__back"></span>
+          <span class="envelope__card">
+            <span class="envelope__card-small">Save the Date</span>
+            <span class="envelope__card-names" data-config="coupleShort"></span>
+            <svg class="envelope__card-sprig" aria-hidden="true"><use href="#sprig" /></svg>
+            <span class="envelope__card-small">14 · 08 · 2027</span>
+            <span class="envelope__card-place">Kuthaba Bush Lodge</span>
+          </span>
+          <span class="envelope__pocket"></span>
+          <span class="envelope__flap-shadow"><span></span></span>
+          <span class="envelope__seal envelope__seal--base" aria-hidden="true">
+            <span class="seal__inner">
+              <svg class="seal__wax"><use href="#seal" /></svg>
+              <span class="seal__text" data-config="initials"></span>
+            </span>
+          </span>
+          <span class="envelope__flap">
+            <span class="flap__face flap__face--out"></span>
+            <span class="flap__face flap__face--in"></span>
+            <span class="envelope__seal envelope__seal--top" aria-hidden="true">
+              <span class="seal__inner">
+                <svg class="seal__wax"><use href="#seal" /></svg>
+                <span class="seal__text" data-config="initials"></span>
+              </span>
+            </span>
+          </span>
+        </span>
+      </button>
+      <p class="intro__hint"><span>Tap the seal to open</span></p>
+    </div>
+    <button class="intro__skip" id="introSkip" type="button">Skip</button>
+  </div>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- ============ Navigation ============ -->
+  <header class="nav" id="nav">
+    <a href="#home" class="nav__brand" data-config="initials"></a>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navMenu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav__menu" id="navMenu">
+      <a href="#story">Our Story</a>
+      <a href="#details">The Day</a>
+      <a href="#venue">Venue</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#faq">FAQ</a>
+      <a href="#rsvp" class="nav__cta">RSVP</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ Hero ============ -->
+    <section class="hero" id="home">
+      <div class="hero__bg" id="heroBg"></div>
+      <div class="hero__frame" aria-hidden="true"></div>
+      <svg class="hero__branch hero__branch--left" aria-hidden="true"><use href="#branch" /></svg>
+      <svg class="hero__branch hero__branch--right" aria-hidden="true"><use href="#branch" /></svg>
+      <div class="hero__leaves" id="leaves" aria-hidden="true"></div>
+
+      <div class="hero__content" id="heroContent">
+        <p class="hero__eyebrow anim" style="--d:.1s">Save the Date</p>
+        <h1 class="hero__names anim" style="--d:.3s">
+          <span data-config="partner1"></span>
+          <span class="hero__amp">&amp;</span>
+          <span data-config="partner2"></span>
+        </h1>
+        <p class="hero__sub anim" style="--d:.55s">are getting married</p>
+
+        <div class="hero__date anim" style="--d:.75s">
+          <span>Saturday</span>
+          <strong>14 <em>·</em> 08 <em>·</em> 2027</strong>
+          <span>Kuthaba Bush Lodge</span>
+        </div>
+
+        <div class="countdown anim" style="--d:.95s" id="countdown" aria-live="off">
+          <div class="countdown__unit"><span class="countdown__num" data-unit="days">000</span><span class="countdown__label">Days</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__label">Hours</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__label">Minutes</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__label">Seconds</span></div>
+        </div>
+
+        <div class="hero__actions anim" style="--d:1.15s">
+          <a href="#rsvp" class="btn btn--light">RSVP now</a>
+          <div class="cal">
+            <button class="btn btn--ghost" id="calToggle" aria-expanded="false" aria-controls="calMenu">Add to calendar</button>
+            <div class="cal__menu" id="calMenu" hidden>
+              <a id="calGoogle" target="_blank" rel="noopener">Google Calendar</a>
+              <a id="calOutlook" target="_blank" rel="noopener">Outlook</a>
+              <button type="button" id="calIcs">Apple / iCal (.ics)</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <a href="#story" class="hero__scroll" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ Our story ============ -->
+    <section class="section story" id="story">
+      <div class="container story__grid">
+        <div class="story__media" data-reveal="left">
+          <div class="story__frame">
+            <div class="story__photo" id="storyPhoto">
+              <div class="placeholder">
+                <svg><use href="#branch" /></svg>
+                <span>Your photo here</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="story__text" data-reveal="right">
+          <p class="eyebrow">Our Story</p>
+          <h2 class="title">Two hearts, one wild adventure</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig" /></svg>
+          <p>
+            What started as a chance meeting became the greatest adventure of our lives.
+            Through city lights and quiet weekends in the bush, we found home in each other —
+            and now we can't wait to promise forever.
+          </p>
+          <p>
+            We would be honoured to have you with us beneath the African sky in the
+            Waterberg mountains as we begin our next chapter together.
+          </p>
+          <p class="story__sign" data-config="coupleShort"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Details ============ -->
+    <section class="section details" id="details">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="eyebrow eyebrow--light">The Celebration</p>
+          <h2 class="title title--light">When &amp; Where</h2>
+          <svg class="sprig sprig--light" aria-hidden="true"><use href="#sprig" /></svg>
+        </header>
+
+        <div class="cards">
+          <article class="card" data-reveal style="--d:.05s">
+            <div class="card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 6c-8 0-15 6-15 14 0 5 3 8 6 10v12h18V30c3-2 6-5 6-10 0-8-7-14-15-14z"/><path d="M24 42V24M18 30l6-6 6 6"/></svg>
+            </div>
+            <h3>The Ceremony</h3>
+            <p class="card__time">3:30 pm</p>
+            <p>Beneath the ancient Wild Fig Tree — one of the oldest and largest of its kind — surrounded by the Waterberg bush.</p>
+          </article>
+          <article class="card card--featured" data-reveal style="--d:.15s">
+            <div class="card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M24 40c-6 0-10-4-10-9 0-6 5-8 6-14 3 3 3 6 3 8 2-2 3-5 3-9 5 4 8 9 8 15 0 5-4 9-10 9z"/><path d="M8 44h32"/></svg>
+            </div>
+            <h3>The Reception</h3>
+            <p class="card__time">6:00 pm – late</p>
+            <p>Dinner and dancing in the open-air Reception Boma, gathered around a central bonfire under a sky full of stars.</p>
+          </article>
+          <article class="card" data-reveal style="--d:.25s">
+            <div class="card__icon">
+              <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M17 6l7 5 7-5 9 6-4 8-4-2v24H16V18l-4 2-4-8 9-6z"/></svg>
+            </div>
+            <h3>Dress Code</h3>
+            <p class="card__time">Formal · Bush Chic</p>
+            <p>Think elegant with a touch of the wild for Saturday, and something comfortable for the Friday braai. August is winter — sunny days, but pack warm layers for the evenings.</p>
+          </article>
+        </div>
+
+        <div class="weekend">
+          <h3 class="weekend__title" data-reveal>A Whole Weekend Together</h3>
+          <p class="weekend__intro" data-reveal>
+            This is a weekend in the bush, not a single day. Arrive on the Friday, celebrate with us
+            on the Saturday, and head home after a slow breakfast on the Sunday.
+          </p>
+          <ol class="weekend__days">
+            <li data-reveal style="--d:.05s">
+              <span class="weekend__day">Friday</span>
+              <span class="weekend__date">13 August</span>
+              <p>Arrive from 2:00 pm, settle into your room and join us around the fire for a relaxed welcome braai.</p>
+            </li>
+            <li data-reveal style="--d:.15s">
+              <span class="weekend__day">Saturday</span>
+              <span class="weekend__date">14 August</span>
+              <p>A lazy morning in the reserve, then the ceremony at the Wild Fig Tree and dinner and dancing in the Boma.</p>
+            </li>
+            <li data-reveal style="--d:.25s">
+              <span class="weekend__day">Sunday</span>
+              <span class="weekend__date">15 August</span>
+              <p>Breakfast together, goodbyes and check-out by 10:00 am — with an easy drive back to Gauteng.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="timeline">
+          <h3 class="timeline__title" data-reveal>Saturday, Hour by Hour</h3>
+          <ol class="timeline__list" id="timeline">
+            <li data-reveal><span class="timeline__time">9:00 am</span><span class="timeline__what">Breakfast &amp; a morning in the reserve</span></li>
+            <li data-reveal><span class="timeline__time">3:00 pm</span><span class="timeline__what">Welcome drinks at the Fig Tree</span></li>
+            <li data-reveal><span class="timeline__time">3:30 pm</span><span class="timeline__what">Ceremony</span></li>
+            <li data-reveal><span class="timeline__time">4:15 pm</span><span class="timeline__what">Canapés &amp; sundowners</span></li>
+            <li data-reveal><span class="timeline__time">6:00 pm</span><span class="timeline__what">Reception &amp; dinner at the Boma</span></li>
+            <li data-reveal><span class="timeline__time">8:30 pm</span><span class="timeline__what">First dance &amp; party by the fire</span></li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Venue ============ -->
+    <section class="section venue" id="venue">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="eyebrow">The Venue</p>
+          <h2 class="title">Kuthaba Bush Lodge</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig" /></svg>
+          <p class="lead">
+            A private game reserve tucked into the majestic Waterberg mountains —
+            about 90 minutes from Pretoria. Dramatic cliffs, natural springs, over 200 bird
+            species and 15 species of game set the scene for our day.
+          </p>
+        </header>
+
+        <div class="stats" data-reveal>
+          <div class="stat"><span class="stat__num" data-count="90">0</span><span class="stat__label">Minutes from Pretoria</span></div>
+          <div class="stat"><span class="stat__num" data-count="200" data-suffix="+">0</span><span class="stat__label">Bird species</span></div>
+          <div class="stat"><span class="stat__num" data-count="15">0</span><span class="stat__label">Game species</span></div>
+          <div class="stat"><span class="stat__num" data-count="0" data-text="Private">0</span><span class="stat__label">Reserve</span></div>
+        </div>
+
+        <div class="venue__grid">
+          <div class="venue__map" data-reveal="left">
+            <iframe id="map" title="Map to Kuthaba Bush Lodge" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+          <div class="venue__info" data-reveal="right">
+            <h3>Getting there</h3>
+            <p class="venue__address" data-config="venue.address"></p>
+            <p>
+              From Johannesburg or Pretoria, take the N1 north towards Polokwane and exit at
+              Modimolle (Nylstroom). The lodge is on Driefontein Road in the Waterberg.
+              Some gravel roads are involved — a normal sedan is fine, just take it slow.
+            </p>
+            <p>Please plan to arrive before sunset: game roads are much easier to navigate in daylight.</p>
+            <div class="venue__buttons">
+              <a class="btn btn--dark" id="dirGoogle" target="_blank" rel="noopener">Google Maps</a>
+              <a class="btn btn--outline" id="dirWaze" target="_blank" rel="noopener">Waze</a>
+              <a class="btn btn--outline" id="venueSite" target="_blank" rel="noopener">Venue website</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="stay">
+          <h3 class="stay__title" data-reveal>Stay the weekend</h3>
+          <p class="stay__intro" data-reveal>
+            The lodge sleeps up to 80 guests on site, and the whole reserve is ours for the weekend.
+            Rooms are for two nights, Friday and Saturday, and are allocated on a first-come basis —
+            let us know in your RSVP if you'd like one.
+          </p>
+          <div class="stay__grid">
+            <div class="stay__item" data-reveal style="--d:.0s"><span class="stay__num">01</span><h4>Red Ivory Chalets</h4><p>Private chalets nestled in the bush.</p></div>
+            <div class="stay__item" data-reveal style="--d:.1s"><span class="stay__num">02</span><h4>Bungalows</h4><p>Comfortable rooms close to the lodge.</p></div>
+            <div class="stay__item" data-reveal style="--d:.2s"><span class="stay__num">03</span><h4>Safari Tents</h4><p>Glamping under canvas — fall asleep to the bush.</p></div>
+            <div class="stay__item" data-reveal style="--d:.3s"><span class="stay__num">04</span><h4>Loft Rooms</h4><p>Cosy loft-style rooms, ideal for groups.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ Gallery ============ -->
+    <section class="section gallery" id="gallery">
+      <div class="container">
+        <header class="section__head" data-reveal>
+          <p class="eyebrow eyebrow--light">Moments</p>
+          <h2 class="title title--light">Our Gallery</h2>
+          <svg class="sprig sprig--light" aria-hidden="true"><use href="#sprig" /></svg>
+        </header>
+        <div class="gallery__grid" id="galleryGrid"></div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section class="section faq" id="faq">
+      <div class="container container--narrow">
+        <header class="section__head" data-reveal>
+          <p class="eyebrow">Good to Know</p>
+          <h2 class="title">Questions &amp; Answers</h2>
+          <svg class="sprig" aria-hidden="true"><use href="#sprig" /></svg>
+        </header>
+        <div class="faq__list">
+          <details class="faq__item" data-reveal>
+            <summary>What will the weather be like?</summary>
+            <div class="faq__body"><p>Mid-August is winter in the Waterberg: clear, sunny days around 20–24 °C, but nights can drop close to freezing. The reception is open-air around a bonfire, so pack warm layers for the evening.</p></div>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>When should I arrive and leave?</summary>
+            <div class="faq__body"><p>Check-in opens at 2:00 pm on Friday 13 August, and we'd love everyone there for the welcome braai that evening. Check-out is by 10:00 am on Sunday 15 August, after breakfast. If Friday is impossible, come through on Saturday morning instead — just tell us so we can plan.</p></div>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>Can I bring a plus-one or children?</summary>
+            <div class="faq__body"><p>Your invitation will say who is included. If you're unsure, please get in touch with us before you RSVP.</p></div>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>What shoes should I wear?</summary>
+            <div class="faq__body"><p>The ceremony and reception are on natural ground and river sand. Block heels, wedges or smart flats are your friends — leave the stilettos at home.</p></div>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>Will there be wildlife around?</summary>
+            <div class="faq__body"><p>The lodge sits inside a private game reserve with plains game and over 200 bird species. Keep an eye out on the drive in, and please follow lodge guidance after dark.</p></div>
+          </details>
+          <details class="faq__item" data-reveal>
+            <summary>Do you have a gift registry?</summary>
+            <div class="faq__body"><p>Your presence is the greatest gift. If you'd like to spoil us, details will follow with the formal invitation.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RSVP ============ -->
+    <section class="section rsvp" id="rsvp">
+      <svg class="rsvp__branch" aria-hidden="true"><use href="#branch" /></svg>
+      <div class="container container--narrow">
+        <header class="section__head" data-reveal>
+          <p class="eyebrow eyebrow--light">Kindly Reply</p>
+          <h2 class="title title--light">RSVP</h2>
+          <svg class="sprig sprig--light" aria-hidden="true"><use href="#sprig" /></svg>
+          <p class="lead lead--light">Please let us know by <strong data-config="rsvpDeadline"></strong></p>
+        </header>
+
+        <div class="rsvp__card" data-reveal="zoom">
+          <form class="form" id="rsvpForm" novalidate>
+            <div class="form__row">
+              <div class="field">
+                <input id="name" name="name" type="text" placeholder=" " autocomplete="name" required />
+                <label for="name">Full name</label>
+                <span class="field__error">Please tell us your name</span>
+              </div>
+              <div class="field">
+                <input id="email" name="email" type="email" placeholder=" " autocomplete="email" required />
+                <label for="email">Email address</label>
+                <span class="field__error">Please enter a valid email</span>
+              </div>
+            </div>
+
+            <fieldset class="choice" id="attendingGroup">
+              <legend>Will you be joining us?</legend>
+              <label class="choice__opt">
+                <input type="radio" name="attending" value="yes" required />
+                <span class="choice__box">
+                  <svg viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.8 4.8 0 0 1 8-3.5A4.8 4.8 0 0 1 20 10c0 5.8-8 11-8 11z"/></svg>
+                  Joyfully accepts
+                </span>
+              </label>
+              <label class="choice__opt">
+                <input type="radio" name="attending" value="no" />
+                <span class="choice__box">
+                  <svg viewBox="0 0 24 24"><path d="M4 12h16"/></svg>
+                  Regretfully declines
+                </span>
+              </label>
+              <span class="field__error">Please choose one</span>
+            </fieldset>
+
+            <div class="form__extra" id="attendingFields">
+              <div class="form__row">
+                <div class="stepper">
+                  <span class="stepper__label">Number of guests</span>
+                  <div class="stepper__ctrl">
+                    <button type="button" data-step="-1" aria-label="Fewer guests">−</button>
+                    <output id="guestCount" aria-live="polite">1</output>
+                    <button type="button" data-step="1" aria-label="More guests">+</button>
+                  </div>
+                  <input type="hidden" name="guests" id="guestsInput" value="1" />
+                </div>
+                <div class="field">
+                  <input id="phone" name="phone" type="tel" placeholder=" " autocomplete="tel" />
+                  <label for="phone">Phone (optional)</label>
+                </div>
+              </div>
+
+              <div class="field" id="guestNamesField" hidden>
+                <input id="guestNames" name="guestNames" type="text" placeholder=" " />
+                <label for="guestNames">Names of your guests</label>
+              </div>
+
+              <fieldset class="toggle-group">
+                <legend>Would you like on-site accommodation?</legend>
+                <label class="pill"><input type="radio" name="accommodation" value="yes" /><span>Yes, please</span></label>
+                <label class="pill"><input type="radio" name="accommodation" value="no" checked /><span>No, thank you</span></label>
+              </fieldset>
+
+              <div class="field">
+                <input id="dietary" name="dietary" type="text" placeholder=" " />
+                <label for="dietary">Dietary requirements</label>
+              </div>
+              <div class="field">
+                <input id="song" name="song" type="text" placeholder=" " />
+                <label for="song">A song that will get you dancing</label>
+              </div>
+            </div>
+
+            <div class="field">
+              <textarea id="message" name="message" rows="3" placeholder=" "></textarea>
+              <label for="message">A note for the couple</label>
+            </div>
+
+            <!-- Honeypot field to deter spam bots -->
+            <input type="text" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <button class="btn btn--accent btn--block" type="submit" id="rsvpSubmit">
+              <span class="btn__text">Send RSVP</span>
+              <span class="btn__spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form__status" id="formStatus" role="status"></p>
+          </form>
+
+          <div class="thanks" id="thanks" hidden>
+            <svg class="thanks__icon" viewBox="0 0 52 52"><circle cx="26" cy="26" r="24"/><path d="M15 27l7 7 15-16"/></svg>
+            <h3 id="thanksTitle">Thank you!</h3>
+            <p id="thanksText"></p>
+            <button class="btn btn--outline" id="rsvpAgain" type="button">Send another response</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="footer">
+    <svg class="footer__sprig" aria-hidden="true"><use href="#sprig" /></svg>
+    <p class="footer__names" data-config="coupleShort"></p>
+    <p class="footer__date" data-config="dateLong"></p>
+    <p class="footer__place">Kuthaba Bush Lodge · Waterberg · South Africa</p>
+    <p class="footer__tag" data-config="hashtag"></p>
+    <p class="footer__contact">Questions? <a data-config-href="contactEmail"></a></p>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">
+    <svg viewBox="0 0 24 24"><path d="M6 14l6-6 6 6"/></svg>
+  </button>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
+    <button class="lightbox__close" id="lbClose" aria-label="Close">×</button>
+    <button class="lightbox__nav lightbox__nav--prev" id="lbPrev" aria-label="Previous photo">‹</button>
+    <figure class="lightbox__figure">
+      <img id="lbImg" alt="" />
+      <figcaption id="lbCaption"></figcaption>
+    </figure>
+    <button class="lightbox__nav lightbox__nav--next" id="lbNext" aria-label="Next photo">›</button>
+  </div>
+
+  <canvas class="confetti" id="confetti" aria-hidden="true"></canvas>
+
+  <script src="js/gallery.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -3,6 +3,14 @@
    Everything here is plain text; save the file and refresh the browser.
    ========================================================================== */
 window.WEDDING = {
+  // ── THE SWITCH ────────────────────────────────────────────────────────────
+  // false : visitors see the "more information to follow" holding page, and the
+  //         full site (wedding.html) bounces them back to it. Use this until the
+  //         formal invitations go out.
+  // true  : the full site opens, and the holding page forwards straight to it.
+  // Preview the full site yourself while it is false: wedding.html?preview=1
+  siteLive: true,
+
   // The couple
   partner1: "Richard Bailey",
   partner2: "Gisela Tiedt",

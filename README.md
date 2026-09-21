@@ -2,12 +2,25 @@
 
 Two sites live here, sharing the same stationery:
 
-| Folder | What it is | When to send it |
+| File / folder | What it is | Who sees it now |
 |---|---|---|
-| `save-the-date/` | **Send this now.** One page: the envelope opens, names, date, countdown and the Friday-to-Sunday weekend. No RSVP. | Now, so guests can hold the dates |
-| this folder (`index.html`) | The full wedding website: story, order of the day, venue and map, accommodation, gallery, FAQ and the RSVP form. | Later, with the formal invitation |
+| `index.html` | Holding page: names, dates and "more information to follow", with a link to the save the date. | Anyone who visits the bare domain |
+| `save-the-date/` | **Send this link now.** The envelope opens, then names, date, countdown and the Friday-to-Sunday weekend. No RSVP. | Your guests |
+| `wedding.html` | The full wedding website: story, order of the day, venue and map, accommodation, gallery, FAQ and the RSVP form. | Nobody yet — it redirects to the holding page |
 
-Each folder publishes on its own — see "Publish it" below and in `save-the-date/README.md`.
+## Opening the full site
+
+One switch controls it — `siteLive` at the top of **`js/config.js`**:
+
+- `siteLive: false` (now) — visitors to the domain get the holding page, and anyone who guesses
+  `wedding.html` is sent back to it.
+- `siteLive: true` (when the invitations go out) — the full site opens, and the holding page
+  forwards straight to it. Nothing else to change.
+
+To check the full site yourself while it is still hidden, open **`wedding.html?preview=1`**.
+
+Note this is a courtesy screen, not a lock: the page's own source is still downloadable by anyone
+determined. Don't put anything genuinely private (like home addresses) on it before it goes live.
 
 Everything is plain HTML/CSS/JavaScript with no build step. Open either `index.html` in a browser to preview it.
 
@@ -83,7 +96,7 @@ The site is static, so any free host works:
 ## Venue facts used
 
 Taken from [kuthaba.co.za](https://kuthaba.co.za/): Driefontein Road, Modimolle 0510, in the Waterberg,
-about 90 minutes from Pretoria. It is a private, malaria-free reserve with 15 game species and over 200 bird species.
+about 90 minutes from Pretoria. It is a private reserve with 15 game species and over 200 bird species.
 Ceremony sites are the Wild Fig Tree and the Cliff, and the reception is in the Reception Boma.
 The lodge sleeps 80 guests (up to 102 attend), in Red Ivory Chalets, Bungalows, Safari Tents and Loft Rooms.
 Lodge contact: 072 641 9751 · info@kuthaba.co.za.

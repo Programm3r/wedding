@@ -12,13 +12,14 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies. Open `index.html
 |---|---|
 | `index.html` | Landing page — envelope intro, then the save-the-date |
 | `wedding.html` | Full site; redirects to the landing page while hidden |
+| `photos/index.html` | Guest photo page — explains how to add photos to the shared album |
 | `js/config.js` | All settings: names, dates, venue, theme, endpoints |
 | `js/landing.js` | Landing page behaviour |
 | `js/main.js` | Full site behaviour |
 | `js/gallery.js` | Generated list of gallery photos |
 | `css/styles.css` | Shared styles: theme, envelope, hero, footer |
 | `css/landing.css` | Landing page extras |
-| `tools/` | Gallery build script and the RSVP collector script |
+| `tools/` | Gallery build script, RSVP collector script, QR generator |
 
 ## Settings
 
@@ -50,6 +51,23 @@ powershell -ExecutionPolicy Bypass -File tools\update-gallery.ps1
 It writes resized web copies to `images/gallery/web/` and regenerates `js/gallery.js`.
 Descriptive file names become captions; camera-style names get none. Feature photos are set via
 `heroImage` and `storyImage` in `js/config.js`.
+
+## Guest photos
+
+`photos/index.html` sends guests to a shared album. Put the album's share link in `photosUrl`
+in `js/config.js` — until then the page says the album is not open yet rather than showing a
+dead button. The album must have "add photos" / collaboration enabled.
+
+Printed QR codes point at this page rather than at the album directly, so the album can be
+swapped without reprinting anything. Regenerate them with:
+
+```
+python -m pip install segno
+python tools/make-qr.py
+```
+
+The target URL is a constant at the top of that script. Outputs land in `tools/qr/`: an SVG and
+PNG of the code, plus `photo-cards.html`, four printable table cards per A4 sheet.
 
 ## RSVP responses
 

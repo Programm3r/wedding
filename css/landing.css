@@ -104,3 +104,56 @@
   .hero__badge span { padding: 7px 14px; }
   .countdown { margin: 2rem 0 2.2rem; }
 }
+
+/* ==========================================================================
+   Photos page (photos/index.html) — where guests add their own pictures
+   ========================================================================== */
+.photos__title {
+  font-family: var(--script); font-weight: 400;
+  font-size: clamp(3rem, 9vw, 5.5rem);
+  line-height: 1.05;
+  margin: 0;
+  text-shadow: 0 4px 30px rgba(0,0,0,.25);
+}
+.photos__sprig { margin: 1.2rem auto 1.6rem; }
+.photos__intro {
+  max-width: 480px; margin: 0 auto 2.2rem;
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.1rem, 2.4vw, 1.35rem);
+  color: color-mix(in srgb, var(--on-dark) 85%, transparent);
+}
+.steps {
+  list-style: none;
+  max-width: 420px;
+  margin: 0 auto 2.4rem;
+  padding: 0;
+  text-align: left;
+  display: grid; gap: 14px;
+}
+.steps li {
+  display: flex; align-items: center; gap: 14px;
+  font-size: 1rem;
+  color: color-mix(in srgb, var(--on-dark) 85%, transparent);
+}
+.steps em { font-family: var(--serif); font-size: 1.1em; color: var(--on-dark); }
+.steps__num {
+  flex: 0 0 auto;
+  width: 34px; height: 34px;
+  display: grid; place-items: center;
+  border: 1px solid color-mix(in srgb, var(--leaf-light) 60%, transparent);
+  border-radius: 50%;
+  font-family: var(--serif); font-size: 1.05rem;
+  color: var(--leaf-light);
+}
+.photos__pending {
+  margin: 0;
+  font-family: var(--serif); font-style: italic; font-size: 1.15rem;
+  color: color-mix(in srgb, var(--on-dark) 75%, transparent);
+}
+.photos__note {
+  max-width: 440px;
+  margin: 2.2rem auto 0;
+  font-size: 0.92rem;
+  color: color-mix(in srgb, var(--on-dark) 62%, transparent);
+}
+.photos__tag { color: var(--leaf-light); margin: 1.4rem 0 0; letter-spacing: 0.05em; }

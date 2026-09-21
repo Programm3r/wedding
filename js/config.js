@@ -68,4 +68,10 @@ window.WEDDING = {
 
   // Contact for questions
   contactEmail: "twoshotbaileys@gmail.com",
+
+  // Guest photo album (the /photos page and the printed QR cards point here).
+  // Paste the "share link" of a Google Photos album that has
+  // "Collaborate / Add photos" switched on. Leave "" and the page politely
+  // says the album is not open yet, instead of showing a dead button.
+  photosUrl: "https://photos.app.goo.gl/gkuLv6dGrmkpcjLh9",
 };

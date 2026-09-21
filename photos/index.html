@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Share your photos</title>
+  <meta name="description" content="Add the photos you took at the wedding to our shared album." />
+  <meta name="theme-color" content="#172036" />
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%237a2334'/%3E%3Cpath d='M32 46s-14-8.5-14-18a8 8 0 0 1 14-5.3A8 8 0 0 1 46 28c0 9.5-14 18-14 18z' fill='%23fff'/%3E%3C/svg%3E" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/styles.css" />
+  <link rel="stylesheet" href="../css/landing.css" />
+  <script src="../js/config.js"></script>
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search).get("theme");
+      document.documentElement.setAttribute("data-theme", q || (window.WEDDING && window.WEDDING.theme) || "waterberg");
+    })();
+  </script>
+</head>
+<body class="is-ready landing">
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="leaf" viewBox="0 0 40 80">
+        <path d="M20 2C34 18 38 44 20 78 2 44 6 18 20 2z" />
+      </symbol>
+      <symbol id="branch" viewBox="0 0 200 420">
+        <path d="M100 420C96 320 110 220 98 110 94 70 100 36 108 0" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+        <g fill="currentColor">
+          <ellipse cx="72" cy="360" rx="12" ry="30" transform="rotate(-50 72 360)" />
+          <ellipse cx="128" cy="330" rx="12" ry="30" transform="rotate(48 128 330)" />
+          <ellipse cx="74" cy="290" rx="11" ry="28" transform="rotate(-48 74 290)" />
+          <ellipse cx="126" cy="258" rx="11" ry="28" transform="rotate(50 126 258)" />
+          <ellipse cx="76" cy="220" rx="10" ry="26" transform="rotate(-46 76 220)" />
+          <ellipse cx="122" cy="186" rx="10" ry="25" transform="rotate(50 122 186)" />
+          <ellipse cx="78" cy="152" rx="9" ry="23" transform="rotate(-44 78 152)" />
+          <ellipse cx="120" cy="118" rx="9" ry="22" transform="rotate(48 120 118)" />
+          <ellipse cx="86" cy="84" rx="8" ry="20" transform="rotate(-40 86 84)" />
+          <ellipse cx="118" cy="52" rx="7" ry="18" transform="rotate(44 118 52)" />
+          <ellipse cx="108" cy="10" rx="6" ry="14" />
+        </g>
+      </symbol>
+      <symbol id="sprig" viewBox="0 0 120 24">
+        <path d="M2 12h116" stroke="currentColor" stroke-width="1" />
+        <g fill="currentColor">
+          <ellipse cx="44" cy="7" rx="7" ry="3" transform="rotate(-25 44 7)" />
+          <ellipse cx="44" cy="17" rx="7" ry="3" transform="rotate(25 44 17)" />
+          <ellipse cx="76" cy="7" rx="7" ry="3" transform="rotate(25 76 7)" />
+          <ellipse cx="76" cy="17" rx="7" ry="3" transform="rotate(-25 76 17)" />
+          <circle cx="60" cy="12" r="3.2" />
+        </g>
+      </symbol>
+    </defs>
+  </svg>
+
+  <main>
+    <section class="hero photos">
+      <div class="hero__bg"></div>
+      <div class="hero__frame" aria-hidden="true"></div>
+      <svg class="hero__branch hero__branch--left" aria-hidden="true"><use href="#branch" /></svg>
+      <svg class="hero__branch hero__branch--right" aria-hidden="true"><use href="#branch" /></svg>
+      <div class="hero__leaves" id="leaves" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <p class="hero__eyebrow anim" style="--d:.1s">Our Wedding Weekend</p>
+        <h1 class="photos__title anim" style="--d:.25s">Share your photos</h1>
+        <svg class="sprig sprig--light photos__sprig anim" style="--d:.4s" aria-hidden="true"><use href="#sprig" /></svg>
+
+        <p class="photos__intro anim" style="--d:.5s">
+          You saw moments we never will. Add them to our shared album so we can
+          relive the whole weekend through your eyes.
+        </p>
+
+        <ol class="steps anim" style="--d:.65s">
+          <li><span class="steps__num">1</span>Tap the button below</li>
+          <li><span class="steps__num">2</span>Choose <em>Add photos</em> in the album</li>
+          <li><span class="steps__num">3</span>Pick everything worth keeping</li>
+        </ol>
+
+        <div class="hero__actions anim" style="--d:.8s">
+          <a class="btn btn--light" id="albumLink" target="_blank" rel="noopener" hidden>Open the album</a>
+          <p class="photos__pending" id="albumPending" hidden>
+            The album opens closer to the wedding — check back on the day.
+          </p>
+        </div>
+
+        <p class="photos__note anim" style="--d:.95s">
+          Signal in the bush can be slow. If photos won't upload here, they'll go
+          through the moment you're back on wifi — this link keeps working.
+        </p>
+
+        <p class="photos__tag anim" style="--d:1.05s" data-config="hashtag"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <svg class="footer__sprig" aria-hidden="true"><use href="#sprig" /></svg>
+    <p class="footer__names" data-config="coupleShort"></p>
+    <p class="footer__contact">Trouble uploading? <a data-config-href="contactEmail"></a></p>
+  </footer>
+
+  <script>
+    // Falling leaves, same as the landing page
+    (function () {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      const box = document.getElementById("leaves");
+      const colors = ["#6b7a3c", "#8a9a52", "#a4b07a", "#7b1e2f", "#ffffff"];
+      const count = window.innerWidth < 600 ? 9 : 16;
+      for (let i = 0; i < count; i++) {
+        const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+        svg.innerHTML = '<use href="#leaf" />';
+        svg.setAttribute("viewBox", "0 0 40 80");
+        svg.style.cssText = [
+          `left:${Math.random() * 100}%`,
+          `--s:${8 + Math.random() * 12}px`,
+          `--c:${colors[Math.floor(Math.random() * colors.length)]}`,
+          `--t:${14 + Math.random() * 14}s`,
+          `--delay:${-Math.random() * 20}s`,
+          `--x:${(Math.random() - 0.5) * 260}px`,
+          `--rot:${(Math.random() > 0.5 ? 1 : -1) * (180 + Math.random() * 360)}deg`,
+        ].join(";");
+        box.appendChild(svg);
+      }
+    })();
+
+    (function () {
+      const W = window.WEDDING || {};
+      const values = {
+        coupleShort: `${W.partner1} & ${W.partner2}`,
+        hashtag: W.hashtag,
+      };
+      document.querySelectorAll("[data-config]").forEach((el) => {
+        const v = values[el.dataset.config];
+        if (v) el.textContent = v;
+      });
+      document.querySelectorAll("[data-config-href]").forEach((el) => {
+        const email = W[el.dataset.configHref];
+        if (email) { el.href = `mailto:${email}`; el.textContent = email; }
+      });
+      document.title = `Share your photos · ${W.partner1} & ${W.partner2}`;
+
+      // The button only appears once the album link is set in js/config.js
+      const link = document.getElementById("albumLink");
+      const pending = document.getElementById("albumPending");
+      if (W.photosUrl) { link.href = W.photosUrl; link.hidden = false; }
+      else { pending.hidden = false; }
+    })();
+  </script>
+</body>
+</html>

@@ -35,7 +35,7 @@
       const email = W[el.dataset.configHref];
       if (email) { el.href = `mailto:${email}`; el.textContent = email; }
     });
-    document.title = `${W.partner1} & ${W.partner2} · Save the Date · 14 August 2027`;
+    document.title = `${W.partner1} & ${W.partner2} · Save the Weekend · 13–15 August 2027`;
     $("#venueSite").href = W.venue.website;
 
     // The link through to the full site appears only once siteLive is true
@@ -144,7 +144,7 @@
     const end = new Date(W.weekendEnd);
     const title = `Wedding weekend: ${W.partner1} & ${W.partner2}`;
     const place = `${W.venue.name}, ${W.venue.address}`;
-    const details = `Save the date! ${W.partner1} and ${W.partner2} are getting married on Saturday 14 August 2027 at ${W.venue.name}. Arrive Friday, leave Sunday. Formal invitation and RSVP to follow.`;
+    const details = `Save the weekend! ${W.partner1} and ${W.partner2} are getting married on Saturday 14 August 2027 at ${W.venue.name}. Arrive Friday, leave Sunday. Formal invitation and RSVP to follow.`;
     const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
     $("#calGoogle").href =

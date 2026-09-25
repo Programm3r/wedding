@@ -17,6 +17,7 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies. Open `index.html
 | `js/landing.js` | Landing page behaviour |
 | `js/main.js` | Full site behaviour |
 | `js/gallery.js` | Generated list of gallery photos |
+| `js/intro-sky.js` | Night sky behind the envelope: stars, fireflies, the gold burst on opening |
 | `css/styles.css` | Shared styles: theme, envelope, hero, footer |
 | `css/landing.css` | Landing page extras |
 | `tools/` | Gallery build script, RSVP collector script, QR generator |

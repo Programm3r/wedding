@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Save the Date · 14 August 2027</title>
+  <title>Save the Weekend · 13–15 August 2027</title>
   <meta name="description" content="Save the date and RSVP for our wedding on 14 August 2027 at Kuthaba Bush Lodge in the Waterberg, South Africa." />
   <meta name="theme-color" content="#1C2B4A" />
-  <meta property="og:title" content="Save the Date · 14 August 2027" />
+  <meta property="og:title" content="Save the Weekend · 13–15 August 2027" />
   <meta property="og:description" content="Join us at Kuthaba Bush Lodge in the Waterberg, South Africa." />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%237B1E2F'/%3E%3Cpath d='M32 46s-14-8.5-14-18a8 8 0 0 1 14-5.3A8 8 0 0 1 46 28c0 9.5-14 18-14 18z' fill='%23fff'/%3E%3C/svg%3E" />
 
@@ -105,26 +105,112 @@
         </g>
         <ellipse cx="38" cy="29" rx="16" ry="8" fill="url(#waxShine)" transform="rotate(-35 38 29)" />
       </symbol>
+
+      <!-- Intro artwork: umbrella-thorn acacia, giraffe, card-corner flourish -->
+      <symbol id="acacia" viewBox="0 0 200 140">
+        <path d="M6 42Q22 22 62 22Q96 6 132 18Q172 14 194 36Q182 48 142 45Q104 54 62 48Q24 52 6 42Z" />
+        <path d="M94 140L99 92Q90 72 66 46L71 44Q94 64 101 80Q108 62 130 43L135 46Q112 70 106 94L109 140Z" />
+        <path d="M100 86Q118 60 158 40L160 44Q124 64 104 92Z" />
+      </symbol>
+      <symbol id="giraffe" viewBox="0 0 100 160">
+        <path d="M11 14L19 6 23 0 25 5 27 0 29 6 34 8 37 13 41 14 59 66 86 73Q93 77 91 86L95 110 93 111 88 93 87 101 90 150 86 150 82 105 80 105 80 150 76 150 74 103 62 103 63 150 59 150 57 105 55 105 54 150 50 150 50 101Q46 90 48 77L31 19 24 18 13 19 9 16Z" />
+      </symbol>
+      <symbol id="corner" viewBox="0 0 40 40">
+        <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
+          <path d="M3 37V13Q3 3 13 3H37" />
+          <path d="M8 30V15Q8 8 15 8H30" />
+          <path d="M14 14q7 0 7 7-.5 5-5 4.5T13 20" />
+        </g>
+        <circle cx="3" cy="3" r="2.2" fill="currentColor" />
+        <circle cx="37" cy="3" r="1.3" fill="currentColor" />
+        <circle cx="3" cy="37" r="1.3" fill="currentColor" />
+      </symbol>
     </defs>
   </svg>
 
   <!-- ============ Envelope intro ============ -->
   <div class="intro" id="intro" role="dialog" aria-label="Invitation">
-    <svg class="intro__sprig intro__sprig--a" aria-hidden="true"><use href="#branch" /></svg>
-    <svg class="intro__sprig intro__sprig--b" aria-hidden="true"><use href="#branch" /></svg>
+    <!-- Night over the Waterberg: stars and fireflies are drawn by js/intro-sky.js -->
+    <div class="sky" aria-hidden="true">
+      <span class="sky__moon"></span>
+      <canvas class="sky__stars" id="skyStars"></canvas>
+      <svg class="sky__land" viewBox="0 0 1600 400" preserveAspectRatio="xMidYMax slice">
+        <path class="sky__ridge sky__ridge--far" d="M0 262L90 244 160 250 240 214 330 208 380 222 470 196 560 191 610 206 700 202 760 180 880 173 940 192 1030 186 1100 162 1210 157 1260 178 1350 174 1420 194 1520 187 1600 200V400H0Z" />
+        <path class="sky__ridge sky__ridge--mid" d="M0 306Q120 276 240 291T480 278Q600 268 720 286T980 276Q1100 264 1220 282T1460 272Q1540 268 1600 278V400H0Z" />
+        <g class="sky__ridge sky__ridge--near">
+          <use href="#acacia" x="1105" y="222" width="150" height="105" />
+          <use href="#giraffe" x="1268" y="232" width="52" height="84" />
+          <use href="#giraffe" x="1326" y="262" width="34" height="55" />
+          <path d="M0 356Q200 334 400 346T800 340T1200 348T1600 336V400H0Z" />
+          <use href="#acacia" x="-40" y="176" width="330" height="231" />
+          <g class="sky__narrow"><!-- phones see only the middle of the landscape -->
+            <use href="#acacia" x="540" y="196" width="230" height="161" />
+            <use href="#giraffe" x="930" y="282" width="40" height="64" />
+            <use href="#giraffe" x="978" y="304" width="26" height="42" />
+          </g>
+          <use href="#acacia" x="1330" y="200" width="250" height="175" />
+        </g>
+      </svg>
+      <span class="sky__glow"></span>
+    </div>
+    <canvas class="sky__fx" id="skyFx" aria-hidden="true"></canvas>
+
     <div class="intro__inner">
       <p class="intro__eyebrow">You are invited</p>
       <button class="envelope" id="envelope" type="button" aria-label="Open the invitation">
         <span class="envelope__body">
           <span class="envelope__back"></span>
           <span class="envelope__card">
-            <span class="envelope__card-small">Save the Date</span>
-            <span class="envelope__card-names" data-config="coupleShort"></span>
+            <span class="envelope__card-corners" aria-hidden="true">
+              <svg><use href="#corner" /></svg><svg><use href="#corner" /></svg><svg><use href="#corner" /></svg><svg><use href="#corner" /></svg>
+            </span>
+            <span class="envelope__card-small envelope__card-title">Save the Weekend</span>
+            <span class="envelope__card-names">
+              <span data-config="partner1"></span>
+              <span class="envelope__card-amp">&amp;</span>
+              <span data-config="partner2"></span>
+            </span>
             <svg class="envelope__card-sprig" aria-hidden="true"><use href="#sprig" /></svg>
-            <span class="envelope__card-small">14 · 08 · 2027</span>
+            <span class="envelope__card-small">13 – 15 August 2027</span>
             <span class="envelope__card-place">Kuthaba Bush Lodge</span>
           </span>
-          <span class="envelope__pocket"></span>
+          <span class="envelope__pocket">
+            <span class="envelope__airmail" aria-hidden="true">Par Avion<small>By Air Mail</small></span>
+            <svg class="envelope__stamp" viewBox="0 0 80 96" aria-hidden="true">
+              <defs>
+                <mask id="stampPerf"><rect width="80" height="96" fill="#fff" /><g fill="#000"><circle cx="0" cy="0" r="2.1"/><circle cx="0" cy="96" r="2.1"/><circle cx="5" cy="0" r="2.1"/><circle cx="5" cy="96" r="2.1"/><circle cx="10" cy="0" r="2.1"/><circle cx="10" cy="96" r="2.1"/><circle cx="15" cy="0" r="2.1"/><circle cx="15" cy="96" r="2.1"/><circle cx="20" cy="0" r="2.1"/><circle cx="20" cy="96" r="2.1"/><circle cx="25" cy="0" r="2.1"/><circle cx="25" cy="96" r="2.1"/><circle cx="30" cy="0" r="2.1"/><circle cx="30" cy="96" r="2.1"/><circle cx="35" cy="0" r="2.1"/><circle cx="35" cy="96" r="2.1"/><circle cx="40" cy="0" r="2.1"/><circle cx="40" cy="96" r="2.1"/><circle cx="45" cy="0" r="2.1"/><circle cx="45" cy="96" r="2.1"/><circle cx="50" cy="0" r="2.1"/><circle cx="50" cy="96" r="2.1"/><circle cx="55" cy="0" r="2.1"/><circle cx="55" cy="96" r="2.1"/><circle cx="60" cy="0" r="2.1"/><circle cx="60" cy="96" r="2.1"/><circle cx="65" cy="0" r="2.1"/><circle cx="65" cy="96" r="2.1"/><circle cx="70" cy="0" r="2.1"/><circle cx="70" cy="96" r="2.1"/><circle cx="75" cy="0" r="2.1"/><circle cx="75" cy="96" r="2.1"/><circle cx="80" cy="0" r="2.1"/><circle cx="80" cy="96" r="2.1"/><circle cx="0" cy="0" r="2.1"/><circle cx="80" cy="0" r="2.1"/><circle cx="0" cy="6" r="2.1"/><circle cx="80" cy="6" r="2.1"/><circle cx="0" cy="12" r="2.1"/><circle cx="80" cy="12" r="2.1"/><circle cx="0" cy="18" r="2.1"/><circle cx="80" cy="18" r="2.1"/><circle cx="0" cy="24" r="2.1"/><circle cx="80" cy="24" r="2.1"/><circle cx="0" cy="30" r="2.1"/><circle cx="80" cy="30" r="2.1"/><circle cx="0" cy="36" r="2.1"/><circle cx="80" cy="36" r="2.1"/><circle cx="0" cy="42" r="2.1"/><circle cx="80" cy="42" r="2.1"/><circle cx="0" cy="48" r="2.1"/><circle cx="80" cy="48" r="2.1"/><circle cx="0" cy="54" r="2.1"/><circle cx="80" cy="54" r="2.1"/><circle cx="0" cy="60" r="2.1"/><circle cx="80" cy="60" r="2.1"/><circle cx="0" cy="66" r="2.1"/><circle cx="80" cy="66" r="2.1"/><circle cx="0" cy="72" r="2.1"/><circle cx="80" cy="72" r="2.1"/><circle cx="0" cy="78" r="2.1"/><circle cx="80" cy="78" r="2.1"/><circle cx="0" cy="84" r="2.1"/><circle cx="80" cy="84" r="2.1"/><circle cx="0" cy="90" r="2.1"/><circle cx="80" cy="90" r="2.1"/><circle cx="0" cy="96" r="2.1"/><circle cx="80" cy="96" r="2.1"/></g></mask>
+                <linearGradient id="stampSky" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0" stop-color="#ecd29a" /><stop offset=".7" stop-color="#d49a5c" /><stop offset="1" stop-color="#b86a44" />
+                </linearGradient>
+              </defs>
+              <g mask="url(#stampPerf)">
+                <rect width="80" height="96" fill="#f8f0dd" />
+                <rect x="6" y="6" width="68" height="84" fill="#7a2334" />
+                <rect x="9.5" y="17" width="61" height="56" fill="url(#stampSky)" />
+                <circle cx="50" cy="44" r="10" fill="#f6e3b4" />
+                <path d="M9.5 64Q30 58 48 62T70.5 59V73H9.5Z" fill="#3a1f24" />
+                <use href="#acacia" x="12" y="41" width="40" height="28" fill="#3a1f24" />
+                <use href="#giraffe" x="54" y="46" width="11" height="18" fill="#3a1f24" />
+                <text x="40" y="13.6" text-anchor="middle" font-size="5.6" letter-spacing=".8" fill="#f8ecd2">SOUTH AFRICA</text>
+                <text x="40" y="83.5" text-anchor="middle" font-size="5" letter-spacing="1.2" fill="#f8ecd2">WATERBERG</text>
+                <text x="13" y="26" font-size="7" font-weight="500" fill="#7a2334">5c</text>
+              </g>
+            </svg>
+            <svg class="envelope__postmark" viewBox="0 0 170 84" aria-hidden="true">
+              <defs><path id="postmarkArc" d="M16 42a26 26 0 0 1 52 0" /></defs>
+              <g fill="none" stroke="currentColor">
+                <circle cx="42" cy="42" r="34" stroke-width="2" />
+                <circle cx="42" cy="42" r="21" stroke-width="1.1" />
+                <path stroke-width="2.4" d="M82 22q11-7 22 0t22 0 22 0 22 0M82 36q11-7 22 0t22 0 22 0 22 0M82 50q11-7 22 0t22 0 22 0 22 0M82 64q11-7 22 0t22 0 22 0 22 0" />
+              </g>
+              <g fill="currentColor" text-anchor="middle">
+                <text font-size="8.4" letter-spacing="1.6"><textPath href="#postmarkArc" startOffset="50%">WATERBERG</textPath></text>
+                <text x="42" y="45" font-size="9.5" font-weight="500">13 VIII</text>
+                <text x="42" y="55" font-size="7.5" letter-spacing="1">2027</text>
+                <text x="42" y="72" font-size="6" letter-spacing="1.4">LIMPOPO</text>
+              </g>
+            </svg>
+          </span>
           <span class="envelope__flap-shadow"><span></span></span>
           <span class="envelope__seal envelope__seal--base" aria-hidden="true">
             <span class="seal__inner">
@@ -177,7 +263,7 @@
       <div class="hero__leaves" id="leaves" aria-hidden="true"></div>
 
       <div class="hero__content" id="heroContent">
-        <p class="hero__eyebrow anim" style="--d:.1s">Save the Date</p>
+        <p class="hero__eyebrow anim" style="--d:.1s">Save the Weekend</p>
         <h1 class="hero__names anim" style="--d:.3s">
           <span data-config="partner1"></span>
           <span class="hero__amp">&amp;</span>
@@ -593,5 +679,6 @@
 
   <script src="js/gallery.js"></script>
   <script src="js/main.js"></script>
+  <script src="js/intro-sky.js"></script>
 </body>
 </html>

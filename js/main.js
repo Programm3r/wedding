@@ -36,7 +36,7 @@
       const email = W[el.dataset.configHref];
       if (email) { el.href = `mailto:${email}`; el.textContent = email; }
     });
-    document.title = `${W.partner1} & ${W.partner2} · Save the Date · 14 August 2027`;
+    document.title = `${W.partner1} & ${W.partner2} · Save the Weekend · 13–15 August 2027`;
 
     if (W.heroImage) {
       const bg = $("#heroBg");

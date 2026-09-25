@@ -103,6 +103,27 @@
       <symbol id="giraffe" viewBox="0 0 100 160">
         <path d="M11 14L19 6 23 0 25 5 27 0 29 6 34 8 37 13 41 14 59 66 86 73Q93 77 91 86L95 110 93 111 88 93 87 101 90 150 86 150 82 105 80 105 80 150 76 150 74 103 62 103 63 150 59 150 57 105 55 105 54 150 50 150 50 101Q46 90 48 77L31 19 24 18 13 19 9 16Z" />
       </symbol>
+      <!-- Walking giraffes for the landscape: legs swing in pairs, the tail swishes -->
+      <symbol id="giraffe-walk" viewBox="-6 -2 112 164" overflow="visible">
+        <g transform="translate(52 99)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="2s" begin="-1.0s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g><g transform="translate(80 99)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g>
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;0 -1.2;0 0" dur="1.0s" repeatCount="indefinite" />
+          <path d="M11 14L19 6 23 0 25 5 27 0 29 6 34 8 37 13 41 14 59 66 86 73Q93 77 91 86L89 100Q84 106 74 103H62Q54 106 50 101Q46 90 48 77L31 19 24 18 13 19 9 16Z" />
+          <g><animateTransform attributeName="transform" type="rotate" values="-5 89 82;7 89 82;-5 89 82" dur="3.40s" repeatCount="indefinite" />
+            <path d="M88 80Q94 92 94.5 108L92.5 108.5Q91 95 86.5 84Z" /><ellipse cx="93.6" cy="111" rx="2" ry="4" /></g>
+        </g>
+        <g transform="translate(58 99)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g><g transform="translate(86 98)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="2s" begin="-1.0s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g>
+      </symbol>
+      <symbol id="giraffe-calf" viewBox="-6 -2 112 164" overflow="visible">
+        <g transform="translate(52 99)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="1.3s" begin="-0.65s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g><g transform="translate(80 99)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="1.3s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g>
+        <g>
+          <animateTransform attributeName="transform" type="translate" values="0 0;0 -1.2;0 0" dur="0.65s" repeatCount="indefinite" />
+          <path d="M11 14L19 6 23 0 25 5 27 0 29 6 34 8 37 13 41 14 59 66 86 73Q93 77 91 86L89 100Q84 106 74 103H62Q54 106 50 101Q46 90 48 77L31 19 24 18 13 19 9 16Z" />
+          <g><animateTransform attributeName="transform" type="rotate" values="-5 89 82;7 89 82;-5 89 82" dur="2.21s" repeatCount="indefinite" />
+            <path d="M88 80Q94 92 94.5 108L92.5 108.5Q91 95 86.5 84Z" /><ellipse cx="93.6" cy="111" rx="2" ry="4" /></g>
+        </g>
+        <g transform="translate(58 99)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="1.3s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g><g transform="translate(86 98)"><g><animateTransform attributeName="transform" type="rotate" values="11;-11;11" dur="1.3s" begin="-0.65s" repeatCount="indefinite" calcMode="spline" keySplines=".45 0 .55 1;.45 0 .55 1" /><path d="M-3 0H3L2.2 46 3 50H-2.6L-1.8 46Z" /></g></g>
+      </symbol>
       <symbol id="corner" viewBox="0 0 40 40">
         <g fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round">
           <path d="M3 37V13Q3 3 13 3H37" />
@@ -127,14 +148,16 @@
         <path class="sky__ridge sky__ridge--mid" d="M0 306Q120 276 240 291T480 278Q600 268 720 286T980 276Q1100 264 1220 282T1460 272Q1540 268 1600 278V400H0Z" />
         <g class="sky__ridge sky__ridge--near">
           <use href="#acacia" x="1105" y="222" width="150" height="105" />
-          <use href="#giraffe" x="1268" y="232" width="52" height="84" />
-          <use href="#giraffe" x="1326" y="262" width="34" height="55" />
           <path d="M0 356Q200 334 400 346T800 340T1200 348T1600 336V400H0Z" />
+          <!-- Mother and calf amble right to left across the field -->
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="1750 0;-260 0" dur="175s" begin="-50s" repeatCount="indefinite" />
+            <use href="#giraffe-walk" x="0" y="266" width="56" height="86" />
+            <use href="#giraffe-calf" x="74" y="293" width="36" height="55" />
+          </g>
           <use href="#acacia" x="-40" y="176" width="330" height="231" />
           <g class="sky__narrow"><!-- phones see only the middle of the landscape -->
             <use href="#acacia" x="540" y="196" width="230" height="161" />
-            <use href="#giraffe" x="930" y="282" width="40" height="64" />
-            <use href="#giraffe" x="978" y="304" width="26" height="42" />
           </g>
           <use href="#acacia" x="1330" y="200" width="250" height="175" />
         </g>

@@ -55,6 +55,18 @@
     buildFlies();
   }
 
+  // As seen from southern Africa: the galactic core, a warm bulge, sits
+  // high in the band, split by the dark Great Rift.
+  const CORE = 0.22;
+
+  function blob(g, x, y, r, color) {
+    const grad = g.createRadialGradient(x, y, 0, x, y, r);
+    grad.addColorStop(0, color);
+    grad.addColorStop(1, "rgba(0, 0, 0, 0)");
+    g.fillStyle = grad;
+    g.fillRect(x - r, y - r, r * 2, r * 2);
+  }
+
   function buildHaze() {
     haze = document.createElement("canvas");
     haze.width = Math.round(w * dpr);
@@ -65,25 +77,34 @@
     for (let i = 0; i < 90; i++) {
       const p = bandPoint(Math.random());
       const r = span * rand(0.05, 0.13);
-      const x = p.x + gauss() * r * 0.4, y = p.y + gauss() * r * 0.4;
       const warm = Math.random() < 0.3;
-      const grad = g.createRadialGradient(x, y, 0, x, y, r);
-      grad.addColorStop(0, warm ? "rgba(255, 200, 190, .05)" : "rgba(190, 200, 255, .06)");
-      grad.addColorStop(1, "rgba(190, 200, 255, 0)");
-      g.fillStyle = grad;
-      g.fillRect(x - r, y - r, r * 2, r * 2);
+      blob(g, p.x + gauss() * r * 0.4, p.y + gauss() * r * 0.4, r,
+        warm ? "rgba(255, 200, 190, .05)" : "rgba(190, 200, 255, .06)");
     }
-    // Dark dust lanes through the middle of the band
+    // The core: a soft, warm swell of light, brightest at its heart
+    for (let i = 0; i < 40; i++) {
+      const p = bandPoint(CORE + gauss() * 0.07);
+      const r = span * rand(0.04, 0.1);
+      blob(g, p.x + gauss() * r * 0.3, p.y + gauss() * r * 0.3, r,
+        Math.random() < 0.6 ? "rgba(255, 214, 170, .06)" : "rgba(255, 190, 175, .045)");
+    }
+    const c = bandPoint(CORE);
+    blob(g, c.x, c.y, span * 0.07, "rgba(255, 228, 190, .07)");
+
+    // Dust: scattered patches, then the Great Rift running down the band's
+    // spine and through the core
     g.globalCompositeOperation = "destination-out";
     for (let i = 0; i < 26; i++) {
       const p = bandPoint(rand(0.15, 0.85));
       const r = span * rand(0.02, 0.05);
-      const x = p.x + gauss() * r, y = p.y + gauss() * r * 0.6;
-      const grad = g.createRadialGradient(x, y, 0, x, y, r);
-      grad.addColorStop(0, "rgba(0,0,0,.5)");
-      grad.addColorStop(1, "rgba(0,0,0,0)");
-      g.fillStyle = grad;
-      g.fillRect(x - r, y - r, r * 2, r * 2);
+      blob(g, p.x + gauss() * r, p.y + gauss() * r * 0.6, r, "rgba(0, 0, 0, .5)");
+    }
+    for (let i = 0; i < 70; i++) {
+      const t = rand(0.3, 0.85);
+      const p = bandPoint(t);
+      const r = span * rand(0.008, 0.022);
+      const wobble = Math.sin(t * 19) * span * 0.008; // the rift meanders
+      blob(g, p.x + wobble, p.y + wobble + gauss() * r * 0.4, r, "rgba(0, 0, 0, .45)");
     }
   }
 
@@ -93,7 +114,12 @@
     stars = [];
     for (let i = 0; i < count; i++) {
       let x, y;
-      if (Math.random() < 0.5) {
+      const roll = Math.random();
+      if (roll < 0.12) { // crowded around the core
+        const p = bandPoint(CORE + gauss() * 0.06);
+        x = p.x + gauss() * span * 0.035;
+        y = p.y + gauss() * span * 0.035;
+      } else if (roll < 0.55) {
         const p = bandPoint(Math.random());
         x = p.x + gauss() * span * 0.06;
         y = p.y + gauss() * span * 0.06;

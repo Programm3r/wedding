@@ -545,45 +545,44 @@
     await new Promise((r) => setTimeout(r, 900));
   }
 
-  /* ---------- Confetti ---------- */
+  /* ---------- Celebration: fine gold motes drift up and fade ---------- */
   function confetti() {
     if (reducedMotion) return;
     const canvas = $("#confetti");
     const ctx = canvas.getContext("2d");
     const dpr = Math.min(window.devicePixelRatio || 1, 2);
     canvas.width = innerWidth * dpr; canvas.height = innerHeight * dpr;
-    ctx.scale(dpr, dpr);
-    const colors = ["#1c2b4a", "#6b7a3c", "#a4b07a", "#7b1e2f", "#a8475a", "#ffffff"];
-    const pieces = Array.from({ length: 180 }, () => ({
-      x: innerWidth / 2 + (Math.random() - 0.5) * 200,
-      y: innerHeight * 0.55,
-      vx: (Math.random() - 0.5) * 16,
-      vy: -Math.random() * 18 - 6,
-      w: 6 + Math.random() * 6,
-      h: 10 + Math.random() * 8,
-      r: Math.random() * Math.PI,
-      vr: (Math.random() - 0.5) * 0.3,
-      c: colors[Math.floor(Math.random() * colors.length)],
-      leaf: Math.random() < 0.35,
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const rand = (lo, hi) => lo + Math.random() * (hi - lo);
+    const golds = ["201, 164, 92", "236, 217, 166", "224, 196, 131"];
+    let motes = Array.from({ length: innerWidth < 600 ? 50 : 90 }, () => ({
+      x: rand(0.08, 0.92) * innerWidth,
+      y: rand(0.45, 1.05) * innerHeight,
+      vx: rand(-10, 10),
+      vy: rand(-80, -24),
+      r: Math.random() < 0.15 ? rand(2, 3.2) : rand(0.7, 1.8),
+      life: -rand(0, 1.8), // staggered start
+      ttl: rand(2.6, 4.4),
+      phase: rand(0, Math.PI * 2),
+      c: golds[Math.floor(Math.random() * golds.length)],
     }));
-    const start = performance.now();
+    let last = performance.now();
     (function frame(now) {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
       ctx.clearRect(0, 0, innerWidth, innerHeight);
-      const t = now - start;
-      pieces.forEach((p) => {
-        p.vy += 0.35; p.vx *= 0.99; p.vy *= 0.99;
-        p.x += p.vx; p.y += p.vy; p.r += p.vr;
-        ctx.save();
-        ctx.translate(p.x, p.y); ctx.rotate(p.r);
-        ctx.globalAlpha = Math.max(0, 1 - t / 4000);
-        ctx.fillStyle = p.c;
-        if (p.leaf) { ctx.beginPath(); ctx.ellipse(0, 0, p.w / 2, p.h / 1.4, 0, 0, Math.PI * 2); ctx.fill(); }
-        else ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h * 0.6);
-        ctx.restore();
+      motes = motes.filter((m) => m.life < m.ttl);
+      motes.forEach((m) => {
+        m.life += dt;
+        if (m.life < 0) return;
+        m.vy *= 1 - 0.35 * dt; // they slow as they rise
+        m.x += (m.vx + Math.sin(m.life * 1.4 + m.phase) * 9) * dt;
+        m.y += m.vy * dt;
+        ctx.fillStyle = `rgba(${m.c}, ${Math.sin((m.life / m.ttl) * Math.PI) * 0.9})`;
+        ctx.beginPath(); ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2); ctx.fill();
       });
-      if (t < 4000) requestAnimationFrame(frame);
-      else ctx.clearRect(0, 0, innerWidth, innerHeight);
-    })(start);
+      if (motes.length) requestAnimationFrame(frame);
+    })(last);
   }
 
   /* ---------- Boot ---------- */

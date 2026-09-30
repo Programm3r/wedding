@@ -14,7 +14,7 @@
 
   const ctx = canvas.getContext("2d");
   const rand = (a, b) => a + Math.random() * (b - a);
-  const golds = ["201, 164, 92", "176, 138, 69", "224, 196, 131"];
+  const golds = ["201, 164, 92", "236, 217, 166", "224, 196, 131"];
 
   let w = 0, h = 0;
   let motes = [];

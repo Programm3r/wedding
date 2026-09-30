@@ -205,9 +205,6 @@ button { font: inherit; cursor: pointer; }
   --gold: #c9a45c;
   --gold-light: #ecd9a6;
   --gold-foil: linear-gradient(100deg, #7d5e28 0%, #c9a45c 30%, #f3e1a8 46%, #c9a45c 62%, #7d5e28 100%);
-  /* Aged paper: tea-stain blotches, and the shadows of a crumpled surface */
-  --stains: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='420'%3E%3Cfilter id='s' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.011' numOctaves='5' seed='7'/%3E%3CfeColorMatrix values='0 0 0 0 .38 0 0 0 0 .23 0 0 0 0 .09 1.35 0 0 0 -.5'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23s)'/%3E%3C/svg%3E");
-  --crumple: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='420'%3E%3Cfilter id='c' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.022' numOctaves='4' seed='3'/%3E%3CfeDiffuseLighting surfaceScale='5' diffuseConstant='1.15' lighting-color='%23fff'%3E%3CfeDistantLight azimuth='225' elevation='58'/%3E%3C/feDiffuseLighting%3E%3CfeColorMatrix values='0 0 0 0 .24 0 0 0 0 .14 0 0 0 0 .05 -2 0 0 0 2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23c)'/%3E%3C/svg%3E");
   position: fixed; inset: 0; z-index: 100;
   display: grid; place-items: center;
   color: var(--on-dark);
@@ -290,8 +287,8 @@ button { font: inherit; cursor: pointer; }
 
 /* Inside: a merlot liner printed with a gold-foil damask */
 .envelope__back {
-  inset: 0 0.9% 0.9%; /* tucked just inside the worn outer edges */
-  border-radius: 3px;
+  inset: 1.4% 2.8% 3%; /* tucked well inside the torn outer edges */
+  border-radius: 14px;
   background: radial-gradient(ellipse at 50% 30%, #8c2a3d, #561222 80%);
   box-shadow:
     0 2px 3px rgba(0, 0, 0, .4),
@@ -361,34 +358,25 @@ button { font: inherit; cursor: pointer; }
 .envelope__card-sprig { width: 15cqi; height: 3cqi; color: var(--leaf); margin: 0.2rem 0 0.35rem; }
 .envelope__card-place { font-family: var(--serif); font-style: italic; font-size: max(0.8rem, 2.5cqi); color: var(--muted); margin-top: 0.1rem; }
 
-/* Outside: an old letter — tan parchment, stained, creased and worn at the edges */
+/* Outside: an old letter. The parchment — stains, creases, torn edges — is painted
+   by tools/envelope/ into two images whose transparency gives each piece its shape. */
 .envelope__pocket {
   inset: 0;
   z-index: 3;
-  background:
-    linear-gradient(to top right, transparent 49.5%, rgba(255, 244, 214, .3) 49.8%, rgba(74, 46, 16, .42) 50.1%, transparent 50.7%),
-    linear-gradient(to top left, transparent 49.5%, rgba(255, 244, 214, .3) 49.8%, rgba(74, 46, 16, .42) 50.1%, transparent 50.7%),
-    radial-gradient(ellipse 78% 74% at 50% 52%, transparent 58%, rgba(96, 60, 22, .5) 100%),
-    linear-gradient(165deg, #e0cfa8, #c8ad7d);
-  clip-path: polygon(0 0, 50% 56%, 100% 0, 99.59% 8.3%, 99.5% 16.7%, 99.17% 25.0%, 99.58% 33.3%, 99.54% 41.7%, 99.47% 50.0%, 99.83% 58.3%, 99.54% 66.7%, 99.43% 75.0%, 99.29% 83.3%, 99.92% 91.7%, 99.6% 99.5%, 91.7% 99.73%, 83.3% 99.92%, 75.0% 99.27%, 66.7% 99.38%, 58.3% 99.96%, 50.0% 99.12%, 41.7% 99.13%, 33.3% 99.41%, 25.0% 99.45%, 16.7% 99.86%, 8.3% 99.99%, 0.4% 99.4%, 0.48% 91.7%, 0.05% 83.3%, 0.17% 75.0%, 0.22% 66.7%, 0.03% 58.3%, 0.42% 50.0%, 0.4% 41.7%, 0.76% 33.3%, 0.47% 25.0%, 0.58% 16.7%, 0.45% 8.3%);
+  background: url("../images/envelope-front.webp") center / 100% 100% no-repeat;
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, .35));
 }
-.envelope__pocket::after, .flap__face--out::after {
-  content: ""; position: absolute; inset: 0;
-  background: var(--stains) center / 100% 100%, var(--crumple) center / 100% 100%;
-}
-.flap__face--out::after { background-position: 30% 100%, 70% 100%; background-size: 130% 190%; } /* same paper, different patch */
 
 /* A soft shadow the closed flap casts onto the pocket */
 .envelope__flap-shadow {
   left: 0; right: 0; top: 0; height: 60%;
   z-index: 4;
-  filter: drop-shadow(0 4px 5px rgba(50, 28, 8, .6));
+  filter: drop-shadow(0 3px 4px rgba(40, 22, 6, .55)) drop-shadow(0 10px 14px rgba(40, 22, 6, .22));
   transition: opacity 0.4s;
 }
 .envelope__flap-shadow > span {
   position: absolute; inset: 0;
-  background: #cdb486;
-  clip-path: polygon(0 0, 100% 0, 53% 96%, 50% 100%, 47% 96%);
+  background: url("../images/envelope-flap.webp") center / 100% 100% no-repeat;
 }
 
 .envelope__flap {
@@ -399,13 +387,12 @@ button { font: inherit; cursor: pointer; }
 }
 .flap__face {
   position: absolute; inset: 0;
-  clip-path: polygon(0 0, 8.3% 0.6%, 16.7% 0.41%, 25.0% 0.25%, 33.3% 0.9%, 41.7% 0.9%, 50.0% 0.76%, 58.3% 0.64%, 66.7% 0.28%, 75.0% 0.21%, 83.3% 0.26%, 91.7% 0.06%, 100% 0, 53% 96%, 50% 100%, 47% 96%);
   backface-visibility: hidden; -webkit-backface-visibility: hidden;
 }
-.flap__face--out {
-  background:
-    radial-gradient(ellipse 84% 100% at 50% 0%, transparent 52%, rgba(96, 60, 22, .42) 100%),
-    linear-gradient(180deg, #e6d6b0 0%, #d2b98a 100%);
+.flap__face--out { background: url("../images/envelope-flap.webp") center / 100% 100% no-repeat; }
+.flap__face--out::before { /* the shading follows the paper's torn outline */
+  -webkit-mask: url("../images/envelope-flap.webp") center / 100% 100% no-repeat;
+  mask: url("../images/envelope-flap.webp") center / 100% 100% no-repeat;
 }
 .flap__face--in {
   transform: rotateX(180deg); /* flips about its centre, so its clip triangle starts upside down */
@@ -475,6 +462,7 @@ button { font: inherit; cursor: pointer; }
   transform: translate(-50%, -56%) translateY(2px) rotate(1.5deg);
 }
 .intro.is-opening .envelope__flap-shadow { opacity: 0; }
+.intro.is-opening .envelope__back { top: 0; transition: top 0s 1s; } /* meets the lifted flap's liner */
 .intro.is-opening .envelope__flap {
   transform: rotateX(180deg);
   z-index: 1;

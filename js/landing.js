@@ -53,7 +53,7 @@
     aug15: "15 Augustus",
     fridayText: "Kom in die middag aan, maak jou tuis en ontspan net. Wanneer die son sak, kuier ons om die vuur by 'n feestelike braai voor die troue, met goeie geselskap en baie gelag. Die perfekte begin van 'n wonderlike naweek.",
     saturdayText: "Die dag waarvan ons al so lank droom, met die mense wat ons die liefste het om ons. Ons sê ‘ja’ en vier die begin van ons lewe saam.",
-    sundayText: "Voordat almal huis toe gaan, eet ons nog een laaste keer saam ontbyt. Dankie dat jy saam met ons gevier het — ons sal hierdie herinneringe vir altyd koester.",
+    sundayText: "Voordat almal huis toe gaan, eet ons nog een laaste keer saam ontbyt, en lag ons oor die beste stories en oomblikke van die vorige aand.",
     note: "<strong>Jy hoef nog nie te antwoord nie.</strong> Dis net sodat jy ons solank in jou dagboek kan aanteken — die formele uitnodiging, verblyfbesonderhede en RSVP volg betyds.",
     noteSmall: "Kamers by die lodge is beperk, so hou die datums oop en hou jou e-pos dop.",
     footerDate: "14 Augustus 2027",

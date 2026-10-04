@@ -94,7 +94,8 @@
       const email = W[el.dataset.configHref];
       if (email) { el.href = `mailto:${email}`; el.textContent = email; }
     });
-    document.title = `${W.partner1} & ${W.partner2} · ${t("saveWeekend", "Save the Weekend")} · ${t("dates", "13–15 August 2027").replace(/ – /, "–")}`;
+    const firstName = (name) => String(name).split(" ")[0];
+    document.title = `${firstName(W.partner1)} & ${firstName(W.partner2)} · ${t("saveWeekend", "Save the Weekend")}`;
     $("#venueSite").href = W.venue.website;
 
     // The link through to the full site appears only once siteLive is true

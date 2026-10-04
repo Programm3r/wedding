@@ -51,7 +51,7 @@ window.WEDDING = {
 
   // Hero background photo (optional). Leave "" for the illustrated background.
   // Example: "images/hero.jpg"
-  heroImage: "",
+  heroImage: "images/hero.jpg",
 
   // Photo shown next to "Our Story". Any image path works, e.g. "images/story.jpg".
   // storyPosition moves the crop focus ("50% 50%" = centre; lower first % = further left).

@@ -21,6 +21,7 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies. Open `index.html
 | `css/styles.css` | Shared styles: theme, envelope, hero, footer |
 | `css/landing.css` | Landing page extras |
 | `tools/envelope/` | Paints the aged-parchment envelope images (`images/envelope-*.webp`) and the wax seal (`images/seal.webp`): `python tools/envelope/build.py` |
+| `tools/update-hero-photos.ps1` | Web-sized copies of the landing page background (`images/hero.jpg`) and the date tile photos (`images/tiles/<date>.jpg` → `images/tiles/web/`) |
 | `tools/` | Gallery build script, RSVP collector script, QR generator |
 
 ## Settings

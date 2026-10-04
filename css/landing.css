@@ -5,37 +5,52 @@
    ========================================================================== */
 
 /* ---------- The weekend, front and centre ---------- */
-.hero__badge {
-  margin: 0.2rem 0 1.8rem;
-  font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase;
+.hero__eyebrow { /* bold cream, lifted off the photo behind it */
+  font-size: 0.9rem; font-weight: 600;
   color: var(--on-dark);
-}
-.hero__badge span {
-  display: inline-block;
-  padding: 8px 20px;
-  border: 1px solid color-mix(in srgb, var(--accent-light) 55%, transparent);
-  border-radius: 999px;
-  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6), 0 0 18px rgba(0, 0, 0, .45);
 }
 .hero__dates {
   display: flex; justify-content: center; align-items: stretch;
   gap: clamp(8px, 1.6vw, 16px);
 }
+/* Photo tiles that flip once, in turn, to show the dates (delays set by --flip in index.html) */
 .hero__day {
   flex: 0 1 clamp(96px, 20vw, 160px);
+  display: grid;
+  perspective: 900px;
+}
+.hero__day-flip {
+  display: grid;
+  transform-style: preserve-3d;
+}
+body.is-ready .hero__day-flip { animation: tileFlip 0.9s cubic-bezier(0.45, 0, 0.25, 1) calc(2.6s + var(--flip, 0s)) both; }
+@keyframes tileFlip { to { transform: rotateY(180deg); } }
+.hero__day-photo, .hero__day-face {
+  grid-area: 1 / 1;
+  border-radius: var(--radius);
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+}
+.hero__day-photo {
+  background: var(--dark-soft) center / cover no-repeat;
+  border: 1px solid color-mix(in srgb, var(--on-dark) 30%, transparent);
+  box-shadow: 0 18px 40px -22px #000;
+}
+.hero__day-photo--14 { background-size: auto 116%; background-position: 50% 0; } /* crops a watermark off the bottom */
+.hero__day-face {
+  transform: rotateY(180deg);
   padding: clamp(12px, 2vw, 20px) clamp(6px, 1.4vw, 14px);
   border: 1px solid var(--line-dark);
-  border-radius: var(--radius);
-  background: color-mix(in srgb, var(--on-dark) 4%, transparent);
+  background: color-mix(in srgb, var(--dark-deep) 55%, transparent);
 }
-.hero__day--main {
+.hero__day--main .hero__day-face {
   background: var(--accent);
   border-color: var(--accent);
   box-shadow: 0 18px 40px -22px #000;
 }
 .hero__day-name {
   display: block;
-  font-size: 0.64rem; letter-spacing: 0.3em; text-transform: uppercase;
+  font-size: 0.64rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase;
   color: var(--leaf-light);
 }
 .hero__day--main .hero__day-name { color: color-mix(in srgb, var(--on-dark) 85%, transparent); }
@@ -48,14 +63,15 @@
 .hero__day-note {
   display: block;
   font-family: var(--serif); font-style: italic;
-  font-size: clamp(0.82rem, 1.8vw, 1rem);
+  font-size: clamp(0.82rem, 1.8vw, 1rem); line-height: 1.3; /* the longer phrases wrap on phones */
   color: color-mix(in srgb, var(--on-dark) 72%, transparent);
 }
 .hero__day--main .hero__day-note { color: var(--on-dark); }
 .hero__month {
   margin: 1rem 0 0;
-  font-size: 0.72rem; letter-spacing: 0.42em; text-transform: uppercase;
-  color: color-mix(in srgb, var(--on-dark) 75%, transparent);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.42em; text-transform: uppercase;
+  color: var(--on-dark);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, .6), 0 0 14px rgba(0, 0, 0, .4);
 }
 .hero__venue { margin: 1.5rem 0 0; line-height: 1.5; }
 .hero__venue-name { display: block; font-family: var(--serif); font-style: italic; font-size: clamp(1.25rem, 3vw, 1.7rem); }
@@ -97,11 +113,13 @@
 .note strong { color: var(--ink); font-weight: 500; }
 .note__small { margin-top: 0.8rem !important; font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
 
+@media (prefers-reduced-motion: reduce) {
+  .hero__day-flip { animation: none !important; transform: rotateY(180deg); } /* straight to the dates */
+}
+
 @media (max-width: 760px) {
   .days { grid-template-columns: 1fr; gap: 34px; }
   .days li + li { border-left: 0; border-top: 1px solid var(--line); padding-top: 32px; }
-  .hero__badge { font-size: 0.6rem; letter-spacing: 0.22em; }
-  .hero__badge span { padding: 7px 14px; }
   .countdown { margin: 2rem 0 2.2rem; }
 }
 

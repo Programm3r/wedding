@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=8" />
-  <link rel="stylesheet" href="css/landing.css?v=8" />
-  <script src="js/config.js?v=8"></script>
+  <link rel="stylesheet" href="css/styles.css?v=9" />
+  <link rel="stylesheet" href="css/landing.css?v=9" />
+  <script src="js/config.js?v=9"></script>
   <script>
     // Apply the colour theme before the page paints (?theme=merlot previews one)
     // and the language (?lang=af for Afrikaans; js/landing.js swaps the text in)
@@ -240,9 +240,8 @@
         </ol>
 
         <div class="note" data-reveal>
-          <p data-i18n="note"><strong>No need to reply yet.</strong> This is just so you can pencil us into the diary —
-            the full invitation, accommodation details and RSVP will follow in good time.</p>
-          <p class="note__small" data-i18n="noteSmall">Rooms at the lodge are limited, so hold the dates and watch your inbox.</p>
+          <p data-i18n="note">The formal invitation, with all the wedding details, RSVPs and accommodation arrangements, will follow closer to the time.</p>
+          <p class="note__small" data-i18n="noteSmall">And no need to worry — the lodge has plenty of rooms for everyone.</p>
         </div>
       </div>
     </section>
@@ -250,14 +249,21 @@
 
   <footer class="footer">
     <svg class="footer__sprig" aria-hidden="true"><use href="#sprig" /></svg>
-    <p class="footer__names" data-config="coupleShort"></p>
+    <p class="footer__names">
+      <span data-config="partner1"></span>
+      <span class="footer__amp">&amp;</span>
+      <span data-config="partner2"></span>
+    </p>
     <p class="footer__date" data-i18n="footerDate">14 August 2027</p>
     <p class="footer__place" data-i18n="footerPlace">Kuthaba Bush Lodge · Waterberg · South Africa</p>
     <p class="footer__tag" data-config="hashtag"></p>
-    <p class="footer__contact"><span data-i18n="questions">Questions?</span> <a data-config-href="contactEmail"></a></p>
+    <p class="footer__contact">
+      <span data-i18n="questions">Any questions? Email us at</span> <a data-config-href="contactEmail"></a>
+      <span data-i18n="orWhatsapp">or contact us via WhatsApp</span>
+    </p>
   </footer>
 
-  <script src="js/landing.js?v=8"></script>
-  <script src="js/intro-fx.js?v=8"></script>
+  <script src="js/landing.js?v=9"></script>
+  <script src="js/intro-fx.js?v=9"></script>
 </body>
 </html>

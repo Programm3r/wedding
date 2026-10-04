@@ -114,7 +114,7 @@ body.is-ready .hero__day-flip { animation: tileFlip 0.9s cubic-bezier(0.45, 0, 0
 }
 .note p { margin: 0; color: var(--muted); }
 .note strong { color: var(--ink); font-weight: 500; }
-.note__small { margin-top: 0.8rem !important; font-family: var(--serif); font-style: italic; font-size: 1.05rem; }
+.note__small { margin-top: 0.8rem !important; font-family: var(--serif); font-size: 1.05rem; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero__day-flip { animation: none !important; transform: rotateY(180deg); } /* straight to the dates */
@@ -178,3 +178,7 @@ body.is-ready .hero__day-flip { animation: tileFlip 0.9s cubic-bezier(0.45, 0, 0
   color: color-mix(in srgb, var(--on-dark) 62%, transparent);
 }
 .photos__tag { color: var(--leaf-light); margin: 1.4rem 0 0; letter-spacing: 0.05em; }
+
+/* ---------- Footer: each name, and the ampersand, on its own line ---------- */
+.footer__names { display: flex; flex-direction: column; align-items: center; line-height: 1.15; }
+.footer__amp { font-family: var(--serif); font-style: italic; font-size: 0.5em; line-height: 1.2; color: var(--accent-light); }

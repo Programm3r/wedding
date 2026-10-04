@@ -67,7 +67,6 @@
   /* The invitation itself keeps the same colours in every theme */
   --envelope: #25355f;
   --envelope-shade: #17223f;
-  --liner-bg: #7a2334;
   --line-dark: color-mix(in srgb, var(--on-dark) 18%, transparent);
 
   --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
@@ -81,8 +80,6 @@
 
   /* Fine paper grain, tinted by the theme through blend modes */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  /* Damask pattern printed on the envelope liner */
-  --liner: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='80' viewBox='0 0 60 80'%3E%3Cpath d='M0 0C0 20 30 20 30 40S0 60 0 80M60 0C60 20 30 20 30 40S60 60 60 80' fill='none' stroke='%23000' stroke-width='.9'/%3E%3Cg transform='translate(30 0)'%3E%3Cpath d='M0-11c4 3 4 8 0 11-4-3-4-8 0-11zM0 11c4-3 4-8 0-11-4 3-4 8 0 11zM-10 0c3-3 6-3 8 0-2 3-5 3-8 0zM10 0c-3-3-6-3-8 0 2 3 5 3 8 0z'/%3E%3Ccircle r='1.6'/%3E%3C/g%3E%3Cg transform='translate(30 80)'%3E%3Cpath d='M0-11c4 3 4 8 0 11-4-3-4-8 0-11zM0 11c4-3 4-8 0-11-4 3-4 8 0 11zM-10 0c3-3 6-3 8 0-2 3-5 3-8 0zM10 0c-3-3-6-3-8 0 2 3 5 3 8 0z'/%3E%3Ccircle r='1.6'/%3E%3C/g%3E%3Cg transform='translate(0 40)'%3E%3Cpath d='M0-11c4 3 4 8 0 11-4-3-4-8 0-11zM0 11c4-3 4-8 0-11-4 3-4 8 0 11zM-10 0c3-3 6-3 8 0-2 3-5 3-8 0zM10 0c-3-3-6-3-8 0 2 3 5 3 8 0z'/%3E%3Ccircle r='1.6'/%3E%3C/g%3E%3Cg transform='translate(60 40)'%3E%3Cpath d='M0-11c4 3 4 8 0 11-4-3-4-8 0-11zM0 11c4-3 4-8 0-11-4 3-4 8 0 11zM-10 0c3-3 6-3 8 0-2 3-5 3-8 0zM10 0c-3-3-6-3-8 0 2 3 5 3 8 0z'/%3E%3Ccircle r='1.6'/%3E%3C/g%3E%3Cg%3E%3Ccircle cx='30' cy='40' r='1.5'/%3E%3Ccircle cx='0' cy='0' r='1.5'/%3E%3Ccircle cx='60' cy='0' r='1.5'/%3E%3Ccircle cx='0' cy='80' r='1.5'/%3E%3Ccircle cx='60' cy='80' r='1.5'/%3E%3Ccircle cx='15' cy='20' r='.8'/%3E%3Ccircle cx='45' cy='20' r='.8'/%3E%3Ccircle cx='15' cy='60' r='.8'/%3E%3Ccircle cx='45' cy='60' r='.8'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* ---------- Base ---------- */
@@ -204,7 +201,6 @@ button { font: inherit; cursor: pointer; }
   /* A dark, quiet stage for the letter, whatever the site theme */
   --gold: #c9a45c;
   --gold-light: #ecd9a6;
-  --gold-foil: linear-gradient(100deg, #7d5e28 0%, #c9a45c 30%, #f3e1a8 46%, #c9a45c 62%, #7d5e28 100%);
   position: fixed; inset: 0; z-index: 100;
   display: grid; place-items: center;
   color: var(--on-dark);
@@ -252,7 +248,7 @@ button { font: inherit; cursor: pointer; }
 }
 .intro__eyebrow::after { transform: scaleX(-1); }
 .intro__hint {
-  color: color-mix(in srgb, var(--on-dark) 85%, transparent);
+  color: var(--gold-light);
   font-family: var(--serif); font-style: italic; font-size: 1.25rem;
   margin: 2rem 0 0;
   animation: fadeUp 1.2s 0.9s var(--ease) both;
@@ -260,14 +256,6 @@ button { font: inherit; cursor: pointer; }
 .intro__hint span { display: inline-block; animation: pulse 2.8s 2.2s ease-in-out infinite; }
 .intro.is-opening .intro__eyebrow,
 .intro.is-opening .intro__hint { opacity: 0; transform: translateY(8px); animation: none; }
-.intro__skip {
-  position: absolute; right: 20px; bottom: 18px;
-  background: none; border: 0; padding: 8px;
-  color: color-mix(in srgb, var(--on-dark) 55%, transparent);
-  font-size: 0.72rem; letter-spacing: 0.28em; text-transform: uppercase;
-  z-index: 3;
-}
-.intro__skip:hover { color: var(--on-dark); }
 
 /* Envelope layers, back to front:
    back < flap (once open) < card < pocket < flap shadow < lower seal half < flap (closed) */
@@ -283,33 +271,25 @@ button { font: inherit; cursor: pointer; }
 }
 .envelope:focus { outline: none; }
 .envelope__body { position: absolute; inset: 0; perspective: 1800px; }
-.envelope__body > span { position: absolute; display: block; }
-
-/* Inside: a merlot liner printed with a gold-foil damask */
-.envelope__back {
-  inset: 1.4% 2.8% 3%; /* tucked well inside the torn outer edges */
+.envelope__body::before { /* the envelope's shadow, kept just inside the torn edges */
+  content: ""; position: absolute; inset: 2% 3% 3%;
   border-radius: 14px;
-  background: radial-gradient(ellipse at 50% 30%, #8c2a3d, #561222 80%);
   box-shadow:
     0 2px 3px rgba(0, 0, 0, .4),
     0 18px 30px -10px rgba(0, 0, 0, .6),
     0 50px 90px -30px rgba(0, 0, 0, .9),
     0 0 110px -10px rgba(255, 214, 160, .16);
-  overflow: hidden;
+  transition: opacity 0.9s ease;
+}
+.envelope__body > span { position: absolute; display: block; }
+
+/* Inside: the same old paper as the outside. images/envelope-back.webp shares the front's
+   torn outline, so nothing shows round the edges; it reaches a hair above the top so the
+   lifted flap meets it without a gap. */
+.envelope__back {
+  inset: -0.4% 0 0;
+  background: url("../images/envelope-back.webp") center / 100% 100% no-repeat;
   z-index: 0;
-}
-.envelope__back::after, .flap__face--in::after {
-  content: ""; position: absolute; inset: 0;
-  background: var(--gold-foil);
-  background-size: 300% 100%; background-position: 100% 0;
-  opacity: 0.7;
-  -webkit-mask: var(--liner) repeat; mask: var(--liner) repeat;
-  -webkit-mask-size: 11cqi auto; mask-size: 11cqi auto;
-}
-.intro.is-opening .envelope__back::after,
-.intro.is-opening .flap__face--in::after { /* the foil catches the light as the flap lifts */
-  background-position: 0 0;
-  transition: background-position 3s 0.6s ease-in-out;
 }
 
 /* The card: heavy cotton paper, gold-foil frame and corners */
@@ -394,11 +374,13 @@ button { font: inherit; cursor: pointer; }
   -webkit-mask: url("../images/envelope-flap.webp") center / 100% 100% no-repeat;
   mask: url("../images/envelope-flap.webp") center / 100% 100% no-repeat;
 }
-.flap__face--in {
-  transform: rotateX(180deg); /* flips about its centre, so its clip triangle starts upside down */
-  clip-path: polygon(47% 4%, 50% 0, 53% 4%, 100% 100%, 0 100%);
-  background: radial-gradient(ellipse at 50% 100%, #8c2a3d, #561222 90%);
-  overflow: hidden;
+.flap__face--in { /* the underside: the same old paper, painted upside down to match the flip */
+  transform: rotateX(180deg);
+  background: url("../images/envelope-flap-in.webp") center / 100% 100% no-repeat;
+}
+.flap__face--in::before {
+  -webkit-mask: url("../images/envelope-flap-in.webp") center / 100% 100% no-repeat;
+  mask: url("../images/envelope-flap-in.webp") center / 100% 100% no-repeat;
 }
 .flap__face::before { /* shading that changes as the flap turns towards / away from the light */
   content: ""; position: absolute; inset: 0; z-index: 1;
@@ -434,17 +416,19 @@ button { font: inherit; cursor: pointer; }
   transform: rotate(-8deg);
   transition: transform 0.45s var(--ease);
 }
-.seal__wax {
+.seal__wax { /* images/seal.webp, painted by tools/envelope/ */
   position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
   filter: drop-shadow(0 2px 1.5px rgba(0,0,0,.45)) drop-shadow(0 6px 10px rgba(0,0,0,.3));
 }
-.seal__text { /* white initials stamped into the wax */
+.seal__text { /* initials stamped into the wax, gilded in the same gold as "You are invited" */
   position: relative;
   font-family: var(--serif); font-weight: 600;
   font-size: max(0.95rem, 4.6cqi);
   letter-spacing: 0.02em;
-  color: #fff;
-  text-shadow: 0 1px 0 rgba(60, 8, 20, .75), 0 -1px 0 rgba(255,255,255,.25), 0 0 6px rgba(0,0,0,.25);
+  color: var(--gold-light);
+  opacity: 0.92;
+  text-shadow: 0 -1px 0 rgba(28, 3, 6, .7), 0 1px 0 rgba(246, 201, 182, .18), 0 0 5px rgba(0, 0, 0, .3);
   white-space: nowrap;
   margin-top: -4%;
 }
@@ -462,7 +446,6 @@ button { font: inherit; cursor: pointer; }
   transform: translate(-50%, -56%) translateY(2px) rotate(1.5deg);
 }
 .intro.is-opening .envelope__flap-shadow { opacity: 0; }
-.intro.is-opening .envelope__back { top: 0; transition: top 0s 1s; } /* meets the lifted flap's liner */
 .intro.is-opening .envelope__flap {
   transform: rotateX(180deg);
   z-index: 1;
@@ -473,6 +456,7 @@ button { font: inherit; cursor: pointer; }
 .intro.is-opening .envelope__card { transform: translateY(-62%); transition-delay: 1.7s; }
 
 /* --- Stage 2 (3.6s+): the envelope slips away and the card is presented --- */
+.intro.is-out .envelope__body::before,
 .intro.is-out .envelope__back,
 .intro.is-out .envelope__pocket,
 .intro.is-out .envelope__seal--base {

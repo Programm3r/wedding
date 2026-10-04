@@ -81,7 +81,6 @@
       setTimeout(() => intro.classList.add("is-out"), 3700);
       setTimeout(finish, 5200);
     });
-    $("#introSkip").addEventListener("click", finish);
     document.addEventListener("keydown", (e) => { if (e.key === "Escape") finish(); });
   }
 

@@ -13,9 +13,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&family=Pinyon+Script&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=3" />
-  <link rel="stylesheet" href="css/landing.css?v=3" />
-  <script src="js/config.js?v=3"></script>
+  <link rel="stylesheet" href="css/styles.css?v=4" />
+  <link rel="stylesheet" href="css/landing.css?v=4" />
+  <script src="js/config.js?v=4"></script>
   <script>
     // Apply the colour theme before the page paints (?theme=merlot previews one)
     (function () {
@@ -59,40 +59,6 @@
         </g>
       </symbol>
 
-      <!-- Wax seal (used twice: the halves split along the flap edge when opened) -->
-      <radialGradient id="waxBody" cx=".36" cy=".3" r=".8">
-        <stop offset="0" stop-color="#b5465a" />
-        <stop offset=".45" stop-color="#8c2437" />
-        <stop offset="1" stop-color="#561020" />
-      </radialGradient>
-      <!-- Lit from the opposite side so the centre reads as pressed in -->
-      <radialGradient id="waxPress" cx=".64" cy=".7" r=".75">
-        <stop offset="0" stop-color="#9e3043" />
-        <stop offset=".6" stop-color="#781b2c" />
-        <stop offset="1" stop-color="#5a1323" />
-      </radialGradient>
-      <radialGradient id="waxShine" cx=".5" cy=".5" r=".5">
-        <stop offset="0" stop-color="#fff" stop-opacity=".38" />
-        <stop offset="1" stop-color="#fff" stop-opacity="0" />
-      </radialGradient>
-      <symbol id="seal" viewBox="0 0 120 120">
-        <path fill="url(#waxBody)" d="M111.1 60.0C110.1 66.0 108.4 71.2 106.7 77.0C105.1 82.8 104.4 89.6 101.1 94.5C97.9 99.5 92.4 103.9 87.0 106.8C81.7 109.7 75.2 111.4 69.2 112.0C63.2 112.6 56.7 112.2 51.1 110.6C45.5 109.0 40.7 105.2 35.5 102.4C30.3 99.6 23.3 98.1 19.7 93.8C16.2 89.5 16.1 82.3 14.1 76.7C12.2 71.1 8.1 65.6 8.0 60.0C8.0 54.4 12.2 49.0 13.9 43.2C15.6 37.4 15.1 29.8 18.5 25.1C21.8 20.5 28.7 18.3 34.1 15.1C39.4 11.8 44.7 6.4 50.4 5.7C56.2 5.1 62.8 9.5 68.6 11.3C74.4 13.0 79.7 14.1 85.1 16.5C90.5 18.8 96.4 21.5 101.0 25.6C105.6 29.7 111.0 35.1 112.7 40.8C114.4 46.6 112.1 54.0 111.1 60.0Z" />
-        <circle cx="60" cy="60" r="42" fill="none" stroke="#6b1627" stroke-width="5" />
-        <circle cx="59" cy="59" r="44.2" fill="none" stroke="#fff" stroke-opacity=".16" stroke-width="1.2" />
-        <circle cx="60" cy="60" r="39" fill="url(#waxPress)" />
-        <circle cx="60.8" cy="60.8" r="38.3" fill="none" stroke="#000" stroke-opacity=".3" stroke-width="1.6" />
-        <circle cx="60" cy="60" r="33.5" fill="none" stroke="#fff" stroke-opacity=".8" stroke-width="1.9" stroke-linecap="round" stroke-dasharray="0.1 4.35" />
-        <circle cx="60" cy="60" r="29.5" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width=".8" />
-        <g fill="#fff" fill-opacity=".85">
-          <path d="M60 36.5l1.8 2.4-1.8 2.4-1.8-2.4z" />
-          <ellipse cx="51.5" cy="80.5" rx="3.4" ry="1.3" transform="rotate(-22 51.5 80.5)" />
-          <ellipse cx="45.5" cy="77.2" rx="3" ry="1.2" transform="rotate(-40 45.5 77.2)" />
-          <ellipse cx="68.5" cy="80.5" rx="3.4" ry="1.3" transform="rotate(22 68.5 80.5)" />
-          <ellipse cx="74.5" cy="77.2" rx="3" ry="1.2" transform="rotate(40 74.5 77.2)" />
-          <circle cx="60" cy="82" r="1.4" />
-        </g>
-        <ellipse cx="38" cy="29" rx="16" ry="8" fill="url(#waxShine)" transform="rotate(-35 38 29)" />
-      </symbol>
 
       <!-- Card-corner flourish -->
       <symbol id="corner" viewBox="0 0 40 40">
@@ -137,7 +103,7 @@
           <span class="envelope__flap-shadow"><span></span></span>
           <span class="envelope__seal envelope__seal--base" aria-hidden="true">
             <span class="seal__inner">
-              <svg class="seal__wax"><use href="#seal" /></svg>
+              <img class="seal__wax" src="images/seal.webp" alt="" />
               <span class="seal__text" data-config="initials"></span>
             </span>
           </span>
@@ -146,7 +112,7 @@
             <span class="flap__face flap__face--in"></span>
             <span class="envelope__seal envelope__seal--top" aria-hidden="true">
               <span class="seal__inner">
-                <svg class="seal__wax"><use href="#seal" /></svg>
+                <img class="seal__wax" src="images/seal.webp" alt="" />
                 <span class="seal__text" data-config="initials"></span>
               </span>
             </span>
@@ -155,7 +121,6 @@
       </button>
       <p class="intro__hint"><span>Tap the seal to open</span></p>
     </div>
-    <button class="intro__skip" id="introSkip" type="button">Skip</button>
   </div>
 
   <main>
@@ -275,7 +240,7 @@
     <p class="footer__contact">Questions? <a data-config-href="contactEmail"></a></p>
   </footer>
 
-  <script src="js/landing.js?v=3"></script>
-  <script src="js/intro-fx.js?v=3"></script>
+  <script src="js/landing.js?v=4"></script>
+  <script src="js/intro-fx.js?v=4"></script>
 </body>
 </html>

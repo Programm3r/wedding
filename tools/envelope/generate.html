@@ -3,6 +3,9 @@
   Paints the aged-parchment envelope artwork used by the intro:
     images/envelope-front.webp  (the pocket: side flaps + bottom flap, V-shaped opening)
     images/envelope-flap.webp   (the closing flap)
+    images/envelope-back.webp   (inside: the back panel, seen through the opening)
+    images/envelope-flap-in.webp (inside: the underside of the flap, seen once it lifts)
+    images/seal.webp            (the wax seal; the initials are laid over it as text)
   Open this page in a browser and right-click each canvas to save it, or see README.
   Everything is drawn from seeded noise, so the result is the same every time.
 -->
@@ -15,6 +18,9 @@
 <body>
 <canvas id="front"></canvas>
 <canvas id="flap"></canvas>
+<canvas id="back"></canvas>
+<canvas id="flapIn"></canvas>
+<canvas id="seal"></canvas>
 <pre id="out" hidden></pre>
 <script>
 (function () {
@@ -50,8 +56,9 @@
   const PAPER = [228, 209, 170], TAN = [203, 176, 128], STAIN = [168, 130, 82], GRIME = [112, 76, 36], EDGE = [74, 47, 20];
 
   /* Paint one sheet. shape(x, y) returns the distance in px to the nearest worn edge
-     (negative = outside); extra(x, y) returns { shade, light } tweaks for folds. */
-  function paint(canvas, w, h, seed, shape, extra) {
+     (negative = outside); extra(x, y) returns { shade, light } tweaks for folds.
+     edgeSeed sets the torn outline, so the inside and outside of a piece can share one. */
+  function paint(canvas, w, h, seed, shape, extra, edgeSeed = seed) {
     canvas.width = w; canvas.height = h;
     const ctx = canvas.getContext("2d");
     const img = ctx.createImageData(w, h);
@@ -94,8 +101,8 @@
       for (let x = 0; x < w; x++) {
         const i = y * w + x;
         // Worn, torn outline: fine fraying plus the odd deeper nick
-        const fray = (fbm(x * 0.028, y * 0.028, 3, seed + 21) - 0.5) * 9 + (fbm(x * 0.19, y * 0.19, 2, seed + 23) - 0.5) * 3.4;
-        const nick = Math.max(0, fbm(x * 0.0075, y * 0.0075, 3, seed + 27) - 0.6) * 85;
+        const fray = (fbm(x * 0.028, y * 0.028, 3, edgeSeed + 21) - 0.5) * 9 + (fbm(x * 0.19, y * 0.19, 2, edgeSeed + 23) - 0.5) * 3.4;
+        const nick = Math.max(0, fbm(x * 0.0075, y * 0.0075, 3, edgeSeed + 27) - 0.6) * 85;
         const sh = shape(x, y);
         const d = sh.d + (fray - nick) * sh.rough;
         if (d < -1) { px[i * 4 + 3] = 0; continue; }
@@ -173,20 +180,137 @@
   /* ---------- Flap: gently bowed edges meeting in a rounded point ---------- */
   const half = (y) => (W / 2 - M) * Math.pow(clamp(1 - y / (FH - 6)), 0.9) + 10 * smooth(FH - 70, FH - 6, y) * clamp((FH - 6 - y) / 20);
   const slope = FH / Math.hypot(FH, W / 2);
-  paint(document.getElementById("flap"), W, FH, 8,
-    (x, y) => {
-      const side = (half(y) - Math.abs(x - W / 2)) * slope;
-      const top = y - 3;
-      return top < side ? { d: top, rough: 0.35, grime: side } : { d: side, rough: 0.8, grime: side };
-    },
+  const flapShape = (x, y) => {
+    const side = (half(y) - Math.abs(x - W / 2)) * slope;
+    const top = y - 3;
+    return top < side ? { d: top, rough: 0.35, grime: side } : { d: side, rough: 0.8, grime: side };
+  };
+  paint(document.getElementById("flap"), W, FH, 8, flapShape,
     (x, y) => {
       const side = (half(y) - Math.abs(x - W / 2)) * slope;
       return { light: 1.02 + Math.exp(-Math.max(0, side) / 2) * 0.12 - Math.exp(-y / 5) * 0.1, shade: Math.exp(-y / 9) * 0.22 };
     });
 
-  document.getElementById("out").textContent =
-    "FRONT:" + document.getElementById("front").toDataURL("image/webp", 0.86) + "\n" +
-    "FLAP:" + document.getElementById("flap").toDataURL("image/webp", 0.86) + "\n";
+  /* ---------- Inside: the same old paper, a touch more shadowed ---------- */
+  // The underside of the flap keeps the flap's torn outline, saved upside down because
+  // that is how it faces you once the flap has lifted.
+  const flapIn = document.getElementById("flapIn");
+  paint(flapIn, W, FH, 18, flapShape,
+    (x, y) => ({ light: 0.97 - Math.exp(-y / 5) * 0.12, shade: Math.exp(-y / 12) * 0.28 }), 8);
+  const upright = document.createElement("canvas");
+  upright.width = W; upright.height = FH;
+  upright.getContext("2d").drawImage(flapIn, 0, 0);
+  const fctx = flapIn.getContext("2d");
+  fctx.clearRect(0, 0, W, FH);
+  fctx.setTransform(1, 0, 0, -1, 0, FH);
+  fctx.drawImage(upright, 0, 0);
+  fctx.setTransform(1, 0, 0, 1, 0, 0);
+  // The back panel: torn like the front at the sides and bottom, folded along the top
+  // where the flap hinges, and darker towards the bottom of the pocket.
+  paint(document.getElementById("back"), W, H, 13,
+    (x, y) => {
+      const outer = rectDist(x, y + 40, W, H + 40, 14) - M;
+      const top = y + 2; // a clean fold, opaque right to the top row
+      return top < outer ? { d: top, rough: 0, grime: outer } : { d: outer, rough: 1, grime: outer };
+    },
+    (x, y) => ({ light: 0.95 - (y / H) * 0.1 - Math.exp(-y / 5) * 0.12, shade: Math.exp(-y / 12) * 0.28 }), 3);
+
+  /* ---------- Wax seal ----------
+     Old sealing wax: dark oxblood, dulled and pitted with age, a couple of hairline cracks,
+     and gilt detail that has mostly rubbed away. Drawn as SVG (the noise and lighting are
+     SVG filters), then flattened to an image so the page never re-runs those filters
+     while the envelope animates. */
+  const SEAL = `<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480" viewBox="0 0 120 120">
+    <defs>
+      <radialGradient id="waxBody" cx=".38" cy=".32" r=".78">
+        <stop offset="0" stop-color="#8e3a36" />
+        <stop offset=".5" stop-color="#682224" />
+        <stop offset="1" stop-color="#3c1014" />
+      </radialGradient>
+      <!-- Lit from the opposite side so the centre reads as pressed in -->
+      <radialGradient id="waxPress" cx=".62" cy=".68" r=".78">
+        <stop offset="0" stop-color="#7a2a2a" />
+        <stop offset=".65" stop-color="#5c1b1f" />
+        <stop offset="1" stop-color="#461317" />
+      </radialGradient>
+      <linearGradient id="waxRidge" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#f6c9b6" stop-opacity=".34" />
+        <stop offset=".45" stop-color="#f6c9b6" stop-opacity="0" />
+        <stop offset=".7" stop-color="#1c0306" stop-opacity="0" />
+        <stop offset="1" stop-color="#1c0306" stop-opacity=".5" />
+      </linearGradient>
+      <linearGradient id="waxWall" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1c0306" stop-opacity=".6" />
+        <stop offset=".5" stop-color="#1c0306" stop-opacity="0" />
+        <stop offset="1" stop-color="#f6c9b6" stop-opacity=".22" />
+      </linearGradient>
+      <linearGradient id="gilt" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#ecd9a6" />
+        <stop offset=".5" stop-color="#c9a45c" />
+        <stop offset="1" stop-color="#a8843f" />
+      </linearGradient>
+      <filter id="waxAge" x="-5%" y="-5%" width="110%" height="110%" color-interpolation-filters="sRGB">
+        <!-- fine pitting across the surface -->
+        <feTurbulence type="fractalNoise" baseFrequency="1.3" numOctaves="2" seed="3" result="grain" />
+        <feDiffuseLighting in="grain" surfaceScale=".6" diffuseConstant="1.16" lighting-color="#fff" result="pits">
+          <feDistantLight azimuth="235" elevation="58" />
+        </feDiffuseLighting>
+        <feBlend in="SourceGraphic" in2="pits" mode="multiply" result="pitted" />
+        <!-- broad patches where the wax has dulled and darkened -->
+        <feTurbulence type="fractalNoise" baseFrequency=".05" numOctaves="3" seed="11" result="mottle" />
+        <feColorMatrix in="mottle" type="matrix" values="0 0 0 0 .14  0 0 0 0 .05  0 0 0 0 .05  0 0 0 1.7 -.82" result="dull" />
+        <feComposite in="dull" in2="pitted" operator="over" result="aged" />
+        <feComposite in="aged" in2="SourceAlpha" operator="in" />
+      </filter>
+      <filter id="giltWear" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency=".16" numOctaves="2" seed="7" result="wear" />
+        <feColorMatrix in="wear" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 5 -2.05" result="kept" />
+        <feComposite in="SourceGraphic" in2="kept" operator="in" />
+      </filter>
+    </defs>
+    <g filter="url(#waxAge)">
+      <path fill="#2e0a0e" transform="translate(.6 1.6)" d="M113.0 60.5C114.0 65.2 112.7 70.7 111.5 75.6C110.2 80.5 108.5 85.8 105.6 89.8C102.7 93.8 98.2 97.2 94.0 99.8C89.9 102.4 85.1 104.2 80.5 105.4C76.0 106.7 71.2 107.2 66.7 107.3C62.2 107.4 57.9 106.4 53.5 105.9C49.0 105.4 44.7 105.3 39.9 104.6C35.1 103.8 29.0 103.7 24.6 101.4C20.2 99.0 15.6 94.9 13.3 90.5C10.9 86.1 10.3 80.0 10.6 75.0C10.9 70.0 14.5 65.2 15.1 60.5C15.7 55.8 13.4 51.3 14.3 47.1C15.2 42.8 18.4 39.2 20.4 35.1C22.5 30.9 23.9 26.0 26.8 22.2C29.7 18.4 33.7 14.3 38.0 12.3C42.3 10.4 47.9 11.2 52.8 10.6C57.7 10.0 62.9 7.7 67.4 8.9C71.9 10.0 76.1 14.4 79.7 17.4C83.3 20.4 85.6 24.1 89.0 27.0C92.4 29.9 97.2 31.5 99.9 34.8C102.7 38.2 103.4 42.8 105.6 47.1C107.8 51.4 112.0 55.8 113.0 60.5Z" />
+      <path fill="url(#waxBody)" d="M113.0 60.5C114.0 65.2 112.7 70.7 111.5 75.6C110.2 80.5 108.5 85.8 105.6 89.8C102.7 93.8 98.2 97.2 94.0 99.8C89.9 102.4 85.1 104.2 80.5 105.4C76.0 106.7 71.2 107.2 66.7 107.3C62.2 107.4 57.9 106.4 53.5 105.9C49.0 105.4 44.7 105.3 39.9 104.6C35.1 103.8 29.0 103.7 24.6 101.4C20.2 99.0 15.6 94.9 13.3 90.5C10.9 86.1 10.3 80.0 10.6 75.0C10.9 70.0 14.5 65.2 15.1 60.5C15.7 55.8 13.4 51.3 14.3 47.1C15.2 42.8 18.4 39.2 20.4 35.1C22.5 30.9 23.9 26.0 26.8 22.2C29.7 18.4 33.7 14.3 38.0 12.3C42.3 10.4 47.9 11.2 52.8 10.6C57.7 10.0 62.9 7.7 67.4 8.9C71.9 10.0 76.1 14.4 79.7 17.4C83.3 20.4 85.6 24.1 89.0 27.0C92.4 29.9 97.2 31.5 99.9 34.8C102.7 38.2 103.4 42.8 105.6 47.1C107.8 51.4 112.0 55.8 113.0 60.5Z" />
+      <!-- the ridge pushed up around the stamp, then the stamped hollow itself -->
+      <circle cx="61" cy="59.5" r="41.5" fill="none" stroke="url(#waxRidge)" stroke-width="6" />
+      <circle cx="61" cy="59.5" r="38" fill="url(#waxPress)" />
+      <circle cx="61" cy="59.5" r="37.2" fill="none" stroke="url(#waxWall)" stroke-width="2.2" />
+      <!-- hairline cracks: a dark split with a lit lower lip -->
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="#1a0305" stroke-opacity=".75" stroke-width=".9" d="M104.5 83.5l-7.2-3.4-3.1 1.6-5.8-3.9" />
+        <path stroke="#f3c0ad" stroke-opacity=".2" stroke-width=".6" d="M104.5 84.4l-7.2-3.4-3.1 1.6-5.8-3.9" />
+        <path stroke="#1a0305" stroke-opacity=".7" stroke-width=".8" d="M24.5 24.5l5.6 5.2.6 3.4 4.8 2.6" />
+        <path stroke="#f3c0ad" stroke-opacity=".18" stroke-width=".55" d="M24.5 25.4l5.6 5.2.6 3.4 4.8 2.6" />
+      </g>
+      <ellipse cx="40" cy="31" rx="15" ry="6.5" fill="#f2c4b2" fill-opacity=".1" transform="rotate(-35 40 31)" />
+    </g>
+    <!-- gilt detail, rubbed thin -->
+    <g filter="url(#giltWear)" opacity=".72">
+      <circle cx="61" cy="59.5" r="32.6" fill="none" stroke="url(#gilt)" stroke-width="1.1" />
+      <circle cx="61" cy="59.5" r="29.4" fill="none" stroke="url(#gilt)" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="0.1 3.6" />
+      <g fill="url(#gilt)">
+        <path d="M61 34.8l1.7 2.3-1.7 2.3-1.7-2.3z" />
+        <ellipse cx="52.5" cy="80" rx="3.3" ry="1.25" transform="rotate(-22 52.5 80)" />
+        <ellipse cx="46.6" cy="76.8" rx="2.9" ry="1.15" transform="rotate(-40 46.6 76.8)" />
+        <ellipse cx="69.5" cy="80" rx="3.3" ry="1.25" transform="rotate(22 69.5 80)" />
+        <ellipse cx="75.4" cy="76.8" rx="2.9" ry="1.15" transform="rotate(40 75.4 76.8)" />
+        <circle cx="61" cy="81.5" r="1.3" />
+      </g>
+    </g>
+  </svg>`;
+  const seal = document.getElementById("seal");
+  seal.width = seal.height = 480;
+  const sealArt = new Image();
+  sealArt.onload = () => {
+    seal.getContext("2d").drawImage(sealArt, 0, 0);
+    document.getElementById("out").textContent =
+      "FRONT:" + document.getElementById("front").toDataURL("image/webp", 0.86) + "\n" +
+      "FLAP:" + document.getElementById("flap").toDataURL("image/webp", 0.86) + "\n" +
+      "BACK:" + document.getElementById("back").toDataURL("image/webp", 0.86) + "\n" +
+      "FLAPIN:" + document.getElementById("flapIn").toDataURL("image/webp", 0.86) + "\n" +
+      "SEAL:" + seal.toDataURL("image/webp", 0.9) + "\n";
+  };
+  sealArt.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(SEAL);
 })();
 </script>
 </body>

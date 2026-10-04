@@ -1,5 +1,5 @@
-"""Render tools/envelope/generate.html in headless Edge/Chrome and save the two
-envelope images into images/. Run from the repository root:
+"""Render tools/envelope/generate.html in headless Edge/Chrome and save the
+envelope and seal images into images/. Run from the repository root:
 
     python tools/envelope/build.py
 """
@@ -18,7 +18,9 @@ if not browser:
 page = "file:///" + os.path.join(ROOT, "tools", "envelope", "generate.html").replace("\\", "/")
 dom = subprocess.run([browser, "--headless=new", "--disable-gpu", "--virtual-time-budget=60000", "--dump-dom", page],
                      capture_output=True, timeout=300).stdout.decode("utf-8", "ignore")
-for key, name in (("FRONT", "envelope-front.webp"), ("FLAP", "envelope-flap.webp")):
+IMAGES = (("FRONT", "envelope-front.webp"), ("FLAP", "envelope-flap.webp"),
+          ("BACK", "envelope-back.webp"), ("FLAPIN", "envelope-flap-in.webp"), ("SEAL", "seal.webp"))
+for key, name in IMAGES:
     m = re.search(key + r":data:image/webp;base64,([A-Za-z0-9+/=]+)", dom)
     if not m:
         sys.exit("Could not find the %s image in the rendered page." % key)

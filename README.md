@@ -20,7 +20,7 @@ Plain HTML, CSS and JavaScript. No build step, no dependencies. Open `index.html
 | `js/intro-fx.js` | Envelope intro flourish: fine gold motes that drift up as the card comes out |
 | `css/styles.css` | Shared styles: theme, envelope, hero, footer |
 | `css/landing.css` | Landing page extras |
-| `tools/envelope/` | Paints the aged-parchment envelope images (`images/envelope-*.webp`): `python tools/envelope/build.py` |
+| `tools/envelope/` | Paints the aged-parchment envelope images (`images/envelope-*.webp`) and the wax seal (`images/seal.webp`): `python tools/envelope/build.py` |
 | `tools/` | Gallery build script, RSVP collector script, QR generator |
 
 ## Settings

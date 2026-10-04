@@ -54,7 +54,7 @@
     fridayText: "Kom in die middag aan, maak jou tuis en ontspan net. Wanneer die son sak, kuier ons om die vuur by 'n feestelike braai voor die troue, met goeie geselskap en baie gelag. Die perfekte begin van 'n wonderlike naweek.",
     saturdayText: "Die dag waarvan ons al so lank droom, met die mense wat ons die liefste het om ons. Ons sê ‘ja’ en vier die begin van ons lewe saam.",
     sundayText: "Voordat almal huis toe gaan, eet ons nog een laaste keer saam ontbyt, en lag ons oor die beste stories en oomblikke van die vorige aand.",
-    note: "Die formele uitnodiging, met al die troubesonderhede, RSVP en verblyfreëlings, volg nader aan die tyd.",
+    note: "Die formele uitnodiging, met al die troubesonderhede, RSVP en verblyfreëlings volg nader aan die tyd.",
     noteSmall: "En jy hoef nie te bekommer nie — die lodge het genoeg kamers vir almal.",
     footerDate: "14 Augustus 2027",
     footerPlace: "Kuthaba Bush Lodge · Waterberg · Suid-Afrika",

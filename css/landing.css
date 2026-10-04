@@ -123,7 +123,7 @@ body.is-ready .hero__day-flip { animation: tileFlip 0.9s cubic-bezier(0.45, 0, 0
 }
 .note p { margin: 0; color: var(--muted); }
 .note strong { color: var(--ink); font-weight: 500; }
-.note__small { margin-top: 0.8rem !important; font-family: var(--serif); font-size: 1.05rem; }
+.note__small { margin-top: 0.8rem !important; } /* same font as the line above */
 
 @media (prefers-reduced-motion: reduce) {
   .hero__day-flip { animation: none !important; transform: rotateY(180deg); } /* straight to the dates */

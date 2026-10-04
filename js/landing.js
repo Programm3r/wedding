@@ -251,6 +251,43 @@
   }
 
   /* ---------- Reveal on scroll ---------- */
+  /* ---------- Date tiles ----------
+     Each flips from its photo to its date once on its own (CSS). After that, or if tapped
+     before then, a tap flips it back and forth between the photo and the date. */
+  function initTiles() {
+    $$(".hero__day").forEach((tile) => {
+      const flip = $(".hero__day-flip", tile);
+      let flipping = false;
+      const settle = (showDate) => {
+        tile.classList.add("is-settled"); // swaps the one-off animation for tap-driven flips
+        tile.classList.toggle("shows-date", showDate);
+      };
+      if (reducedMotion) settle(true); // the dates show from the start
+
+      flip.addEventListener("animationstart", (e) => { if (e.animationName === "tileFlip") flipping = true; });
+      flip.addEventListener("animationend", (e) => {
+        if (e.animationName !== "tileFlip") return;
+        flipping = false;
+        settle(true);
+      });
+
+      const toggle = () => {
+        if (flipping) return; // let its own flip finish first
+        if (!tile.classList.contains("is-settled")) {
+          settle(false); // still showing its photo: take over from the timer
+          void flip.offsetWidth; // so the flip below animates from the photo
+        }
+        tile.classList.toggle("shows-date");
+      };
+      tile.setAttribute("role", "button");
+      tile.tabIndex = 0;
+      tile.addEventListener("click", toggle);
+      tile.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+      });
+    });
+  }
+
   function initReveal() {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -268,5 +305,6 @@
   initLeaves();
   initCountdown();
   initCalendar();
+  initTiles();
   initReveal();
 })();

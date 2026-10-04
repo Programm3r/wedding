@@ -4,6 +4,9 @@
    buttons, footer and animations. Only the extras live here.
    ========================================================================== */
 
+/* Afrikaans (?lang=af): keep the English out of sight until js/landing.js has swapped it */
+html[lang="af"]:not(.is-translated) [data-i18n] { visibility: hidden; }
+
 /* ---------- The weekend, front and centre ---------- */
 .hero__eyebrow { /* bold cream, lifted off the photo behind it */
   font-size: 0.9rem; font-weight: 600;

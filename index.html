@@ -13,14 +13,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=6" />
-  <link rel="stylesheet" href="css/landing.css?v=6" />
-  <script src="js/config.js?v=6"></script>
+  <link rel="stylesheet" href="css/styles.css?v=7" />
+  <link rel="stylesheet" href="css/landing.css?v=7" />
+  <script src="js/config.js?v=7"></script>
   <script>
     // Apply the colour theme before the page paints (?theme=merlot previews one)
+    // and the language (?lang=af for Afrikaans; js/landing.js swaps the text in)
     (function () {
-      var q = new URLSearchParams(location.search).get("theme");
-      document.documentElement.setAttribute("data-theme", q || (window.WEDDING && window.WEDDING.theme) || "waterberg");
+      var params = new URLSearchParams(location.search);
+      document.documentElement.setAttribute("data-theme", params.get("theme") || (window.WEDDING && window.WEDDING.theme) || "waterberg");
+      if (params.get("lang") === "af") document.documentElement.lang = "af";
     })();
   </script>
 </head>
@@ -75,28 +77,28 @@
   </svg>
 
   <!-- ============ Envelope intro ============ -->
-  <div class="intro" id="intro" role="dialog" aria-label="Invitation">
+  <div class="intro" id="intro" role="dialog" aria-label="Invitation" data-i18n-label="invitation">
     <span class="intro__glow intro__glow--a" aria-hidden="true"></span>
     <span class="intro__glow intro__glow--b" aria-hidden="true"></span>
     <canvas class="intro__fx" id="introFx" aria-hidden="true"></canvas>
 
     <div class="intro__inner">
-      <p class="intro__eyebrow">You are invited</p>
-      <button class="envelope" id="envelope" type="button" aria-label="Open the invitation">
+      <p class="intro__eyebrow" data-i18n="invited">You are invited</p>
+      <button class="envelope" id="envelope" type="button" aria-label="Open the invitation" data-i18n-label="openInvitation">
         <span class="envelope__body">
           <span class="envelope__back"></span>
           <span class="envelope__card">
             <span class="envelope__card-corners" aria-hidden="true">
               <svg><use href="#corner" /></svg><svg><use href="#corner" /></svg><svg><use href="#corner" /></svg><svg><use href="#corner" /></svg>
             </span>
-            <span class="envelope__card-small envelope__card-title">Save the Weekend</span>
+            <span class="envelope__card-small envelope__card-title" data-i18n="saveWeekend">Save the Weekend</span>
             <span class="envelope__card-names">
               <span data-config="partner1"></span>
               <span class="envelope__card-amp">&amp;</span>
               <span data-config="partner2"></span>
             </span>
             <svg class="envelope__card-sprig" aria-hidden="true"><use href="#sprig" /></svg>
-            <span class="envelope__card-small">13 – 15 August 2027</span>
+            <span class="envelope__card-small" data-i18n="dates">13 – 15 August 2027</span>
             <span class="envelope__card-place">Kuthaba Bush Lodge</span>
           </span>
           <span class="envelope__pocket"></span>
@@ -119,7 +121,7 @@
           </span>
         </span>
       </button>
-      <p class="intro__hint"><span>Tap the seal to open</span></p>
+      <p class="intro__hint"><span data-i18n="tapSeal">Tap the seal to open</span></p>
     </div>
   </div>
 
@@ -131,13 +133,13 @@
       <div class="hero__leaves" id="leaves" aria-hidden="true"></div>
 
       <div class="hero__content">
-        <p class="hero__eyebrow anim" style="--d:.1s">Save the Weekend</p>
+        <p class="hero__eyebrow anim" style="--d:.1s" data-i18n="saveWeekend">Save the Weekend</p>
         <h1 class="hero__names anim" style="--d:.3s">
           <span data-config="partner1"></span>
           <span class="hero__amp">&amp;</span>
           <span data-config="partner2"></span>
         </h1>
-        <p class="hero__sub anim" style="--d:.55s">are getting married</p>
+        <p class="hero__sub anim" style="--d:.55s" data-i18n="gettingMarried">are getting married</p>
 
         <div class="hero__dates anim" style="--d:.85s">
           <!-- Each tile starts as a photo and flips once to its date: the 13th, then the 14th, then the 15th -->
@@ -145,9 +147,9 @@
             <span class="hero__day-flip">
               <span class="hero__day-photo" style="background-image:url(images/tiles/web/13.jpg)" aria-hidden="true"></span>
               <span class="hero__day-face">
-                <span class="hero__day-name">Fri</span>
+                <span class="hero__day-name" data-i18n="fri">Fri</span>
                 <span class="hero__day-num">13</span>
-                <span class="hero__day-note">Celebrations begin</span>
+                <span class="hero__day-note" data-i18n="friNote">Celebrations begin</span>
               </span>
             </span>
           </div>
@@ -155,9 +157,9 @@
             <span class="hero__day-flip">
               <span class="hero__day-photo hero__day-photo--14" style="background-image:url(images/tiles/web/14.jpg)" aria-hidden="true"></span>
               <span class="hero__day-face">
-                <span class="hero__day-name">Sat</span>
+                <span class="hero__day-name" data-i18n="sat">Sat</span>
                 <span class="hero__day-num">14</span>
-                <span class="hero__day-note">We say ‘I do’</span>
+                <span class="hero__day-note" data-i18n="satNote">We say ‘I do’</span>
               </span>
             </span>
           </div>
@@ -165,14 +167,14 @@
             <span class="hero__day-flip">
               <span class="hero__day-photo" style="background-image:url(images/tiles/web/15.jpg)" aria-hidden="true"></span>
               <span class="hero__day-face">
-                <span class="hero__day-name">Sun</span>
+                <span class="hero__day-name" data-i18n="sun">Sun</span>
                 <span class="hero__day-num">15</span>
-                <span class="hero__day-note">Until we meet again</span>
+                <span class="hero__day-note" data-i18n="sunNote">Until we meet again</span>
               </span>
             </span>
           </div>
         </div>
-        <p class="hero__month anim" style="--d:.95s">August 2027</p>
+        <p class="hero__month anim" style="--d:.95s" data-i18n="month">August 2027</p>
 
         <p class="hero__venue anim" style="--d:1s">
           <span class="hero__venue-name" data-config="venue.name"></span>
@@ -180,64 +182,67 @@
         </p>
 
         <div class="countdown anim" style="--d:1.05s" id="countdown">
-          <div class="countdown__unit"><span class="countdown__num" data-unit="days">000</span><span class="countdown__label">Days</span></div>
-          <div class="countdown__unit"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__label">Hours</span></div>
-          <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__label">Minutes</span></div>
-          <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__label">Seconds</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="days">000</span><span class="countdown__label" data-i18n="days">Days</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="hours">00</span><span class="countdown__label" data-i18n="hours">Hours</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="minutes">00</span><span class="countdown__label" data-i18n="minutes">Minutes</span></div>
+          <div class="countdown__unit"><span class="countdown__num" data-unit="seconds">00</span><span class="countdown__label" data-i18n="seconds">Seconds</span></div>
         </div>
 
         <div class="hero__actions anim" style="--d:1.2s">
           <div class="cal">
-            <button class="btn btn--light" id="calToggle" aria-expanded="false" aria-controls="calMenu">Add to calendar</button>
+            <button class="btn btn--light" id="calToggle" aria-expanded="false" aria-controls="calMenu" data-i18n="addCalendar">Add to calendar</button>
             <div class="cal__menu" id="calMenu" hidden>
               <a id="calGoogle" target="_blank" rel="noopener">Google Calendar</a>
               <a id="calOutlook" target="_blank" rel="noopener">Outlook</a>
               <button type="button" id="calIcs">Apple / iCal (.ics)</button>
             </div>
           </div>
-          <a class="btn btn--ghost" id="venueSite" target="_blank" rel="noopener">See the venue</a>
-          <a class="btn btn--ghost" id="fullSite" href="wedding.html" hidden>Full details &amp; RSVP</a>
+          <a class="btn btn--ghost" id="venueSite" target="_blank" rel="noopener" data-i18n="seeVenue">See the venue</a>
+          <a class="btn btn--ghost" id="fullSite" href="wedding.html" hidden data-i18n="fullSite">Full details &amp; RSVP</a>
         </div>
       </div>
 
-      <a href="#weekend" class="hero__scroll" aria-label="Scroll down"><span></span></a>
+      <a href="#weekend" class="hero__scroll" aria-label="Scroll down" data-i18n-label="scrollDown"><span></span></a>
     </section>
 
     <!-- ============ The weekend ============ -->
     <section class="three-days" id="weekend">
       <div class="container">
         <header class="three-days__head" data-reveal>
-          <p class="eyebrow">Make a weekend of it</p>
-          <h2 class="title">Three days in the bush</h2>
+          <p class="eyebrow" data-i18n="weekendEyebrow">Let’s make a weekend of it</p>
+          <h2 class="title" data-i18n="weekendTitle">Because one day just isn’t enough</h2>
           <svg class="sprig" aria-hidden="true"><use href="#sprig" /></svg>
-          <p class="lead">
-            We're gathering everyone in a private game reserve in the Waterberg,
-            about 90 minutes from Pretoria. Come for the whole weekend — the lodge is ours.
+          <p class="lead" data-i18n="weekendLead">
+            We’d be honoured to have you spend the weekend with us as we celebrate our wedding.
+            Rather than just a wedding day, we want a whole weekend with the people we love most.
+            We’ve gathered our favourite people, found a beautiful spot in the Waterberg, and have
+            the whole lodge to ourselves. Come relax, unwind, enjoy the bush, and share a few
+            wonderful days together.
           </p>
         </header>
 
         <ol class="days">
           <li data-reveal style="--d:.05s">
-            <span class="days__name">Friday</span>
-            <span class="days__date">13 August</span>
-            <p>Arrive from the afternoon, settle in, and join us around the fire for a relaxed welcome braai.</p>
+            <span class="days__name" data-i18n="friday">Friday</span>
+            <span class="days__date" data-i18n="aug13">13 August</span>
+            <p data-i18n="fridayText">Arrive in the afternoon, settle in and just relax. As the sun goes down, we’ll gather around the fire for a pre-wedding celebration braai, with good company and laughter. The perfect start to a great weekend.</p>
           </li>
           <li data-reveal style="--d:.15s">
-            <span class="days__name">Saturday</span>
-            <span class="days__date">14 August</span>
-            <p>The day itself: a ceremony at the Cliff Venue, looking out over the Waterberg, then dinner and dancing under the stars.</p>
+            <span class="days__name" data-i18n="saturday">Saturday</span>
+            <span class="days__date" data-i18n="aug14">14 August</span>
+            <p data-i18n="saturdayText">The day we’ve been dreaming of, with the people we love most around us. We’ll say ‘I&nbsp;do’ and celebrate the beginning of our life together.</p>
           </li>
           <li data-reveal style="--d:.25s">
-            <span class="days__name">Sunday</span>
-            <span class="days__date">15 August</span>
-            <p>One last breakfast together, fond farewells, and an easy drive home.</p>
+            <span class="days__name" data-i18n="sunday">Sunday</span>
+            <span class="days__date" data-i18n="aug15">15 August</span>
+            <p data-i18n="sundayText">Before everyone heads home, we’ll share one last breakfast together. Thank you for celebrating with us — we’ll treasure these memories forever.</p>
           </li>
         </ol>
 
         <div class="note" data-reveal>
-          <p><strong>No need to reply yet.</strong> This is just so you can pencil us into the diary —
+          <p data-i18n="note"><strong>No need to reply yet.</strong> This is just so you can pencil us into the diary —
             the full invitation, accommodation details and RSVP will follow in good time.</p>
-          <p class="note__small">Rooms at the lodge are limited, so hold the dates and watch your inbox.</p>
+          <p class="note__small" data-i18n="noteSmall">Rooms at the lodge are limited, so hold the dates and watch your inbox.</p>
         </div>
       </div>
     </section>
@@ -246,13 +251,13 @@
   <footer class="footer">
     <svg class="footer__sprig" aria-hidden="true"><use href="#sprig" /></svg>
     <p class="footer__names" data-config="coupleShort"></p>
-    <p class="footer__date">14 August 2027</p>
-    <p class="footer__place">Kuthaba Bush Lodge · Waterberg · South Africa</p>
+    <p class="footer__date" data-i18n="footerDate">14 August 2027</p>
+    <p class="footer__place" data-i18n="footerPlace">Kuthaba Bush Lodge · Waterberg · South Africa</p>
     <p class="footer__tag" data-config="hashtag"></p>
-    <p class="footer__contact">Questions? <a data-config-href="contactEmail"></a></p>
+    <p class="footer__contact"><span data-i18n="questions">Questions?</span> <a data-config-href="contactEmail"></a></p>
   </footer>
 
-  <script src="js/landing.js?v=6"></script>
-  <script src="js/intro-fx.js?v=6"></script>
+  <script src="js/landing.js?v=7"></script>
+  <script src="js/intro-fx.js?v=7"></script>
 </body>
 </html>

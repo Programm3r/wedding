@@ -43,6 +43,12 @@ Three colour themes, set via `theme` in `js/config.js`: `waterberg`, `merlot`, `
 Preview one without editing by appending `?theme=merlot` to the URL. Tokens are defined at the
 top of `css/styles.css`.
 
+## Afrikaans
+
+The landing page is in English by default. Append `?lang=af` to the URL for Afrikaans (it combines
+with others, e.g. `?lang=af&theme=merlot`). The English text lives in `index.html`; the Afrikaans
+is the `AF` list near the top of `js/landing.js`, keyed by each element's `data-i18n` attribute.
+
 ## Photos
 
 Drop images into `images/gallery/`, then run:

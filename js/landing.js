@@ -15,6 +15,64 @@
     set(key, value) { try { sessionStorage.setItem(key, value); } catch { /* storage unavailable */ } },
   };
 
+  /* ---------- Language ----------
+     English is written in index.html. Add ?lang=af to the address for Afrikaans: each element
+     marked data-i18n="key" (or data-i18n-label for its aria-label) takes its text from AF. */
+  const lang = document.documentElement.lang === "af" ? "af" : "en";
+  const AF = {
+    invitation: "Uitnodiging",
+    invited: "Jy is genooi",
+    openInvitation: "Maak die uitnodiging oop",
+    saveWeekend: "Hou die naweek oop",
+    dates: "13 – 15 Augustus 2027",
+    tapSeal: "Tik op die seël om oop te maak",
+    gettingMarried: "gaan trou",
+    fri: "Vr",
+    sat: "Sa",
+    sun: "So",
+    friNote: "Die fees begin",
+    satNote: "Ons sê ‘ja’",
+    sunNote: "Tot weersiens",
+    month: "Augustus 2027",
+    days: "Dae",
+    hours: "Ure",
+    minutes: "Minute",
+    seconds: "Sekondes",
+    addCalendar: "Voeg by kalender",
+    seeVenue: "Sien die trouplek",
+    fullSite: "Alle besonderhede &amp; RSVP",
+    scrollDown: "Rol af",
+    weekendEyebrow: "Kom ons maak 'n naweek daarvan",
+    weekendTitle: "Want een dag is net nie genoeg nie",
+    weekendLead: "Dit sal vir ons 'n eer wees om die naweek saam met jou deur te bring terwyl ons ons troue vier. Eerder as net 'n troudag, wil ons 'n hele naweek saam met die mense wat ons die liefste het. Ons het ons gunstelingmense bymekaargemaak, 'n pragtige plekkie in die Waterberg gevind, en die hele lodge is net vir ons. Kom ontspan, kom tot rus, geniet die bosveld, en deel 'n paar wonderlike dae saam met ons.",
+    friday: "Vrydag",
+    saturday: "Saterdag",
+    sunday: "Sondag",
+    aug13: "13 Augustus",
+    aug14: "14 Augustus",
+    aug15: "15 Augustus",
+    fridayText: "Kom in die middag aan, maak jou tuis en ontspan net. Wanneer die son sak, kuier ons om die vuur by 'n feestelike braai voor die troue, met goeie geselskap en baie gelag. Die perfekte begin van 'n wonderlike naweek.",
+    saturdayText: "Die dag waarvan ons al so lank droom, met die mense wat ons die liefste het om ons. Ons sê ‘ja’ en vier die begin van ons lewe saam.",
+    sundayText: "Voordat almal huis toe gaan, eet ons nog een laaste keer saam ontbyt. Dankie dat jy saam met ons gevier het — ons sal hierdie herinneringe vir altyd koester.",
+    note: "<strong>Jy hoef nog nie te antwoord nie.</strong> Dis net sodat jy ons solank in jou dagboek kan aanteken — die formele uitnodiging, verblyfbesonderhede en RSVP volg betyds.",
+    noteSmall: "Kamers by die lodge is beperk, so hou die datums oop en hou jou e-pos dop.",
+    footerDate: "14 Augustus 2027",
+    footerPlace: "Kuthaba Bush Lodge · Waterberg · Suid-Afrika",
+    questions: "Vrae?",
+    venueArea: "Waterberg, Limpopo · Suid-Afrika",
+    married: "is getroud!",
+    reminder: "Trounaweek oor 'n maand!",
+  };
+  const t = (key, english) => (lang === "af" && AF[key]) || english;
+
+  function applyLanguage() {
+    if (lang === "af") {
+      $$("[data-i18n]").forEach((el) => { if (AF[el.dataset.i18n]) el.innerHTML = AF[el.dataset.i18n]; });
+      $$("[data-i18n-label]").forEach((el) => { if (AF[el.dataset.i18nLabel]) el.setAttribute("aria-label", AF[el.dataset.i18nLabel]); });
+    }
+    document.documentElement.classList.add("is-translated"); // reveals the text (see css/landing.css)
+  }
+
   /* ---------- Fill text from config ---------- */
   function applyConfig() {
     const values = {
@@ -25,7 +83,7 @@
       hashtag: W.hashtag,
       dateLine: W.dateLine,
       "venue.name": W.venue && W.venue.name,
-      "venue.area": W.venue && W.venue.area,
+      "venue.area": W.venue && t("venueArea", W.venue.area),
     };
     $$("[data-config]").forEach((el) => {
       const v = values[el.dataset.config];
@@ -35,7 +93,7 @@
       const email = W[el.dataset.configHref];
       if (email) { el.href = `mailto:${email}`; el.textContent = email; }
     });
-    document.title = `${W.partner1} & ${W.partner2} · Save the Weekend · 13–15 August 2027`;
+    document.title = `${W.partner1} & ${W.partner2} · ${t("saveWeekend", "Save the Weekend")} · ${t("dates", "13–15 August 2027").replace(/ – /, "–")}`;
     $("#venueSite").href = W.venue.website;
 
     // The link through to the full site appears only once siteLive is true
@@ -129,7 +187,7 @@
         }
       });
       if (target - Date.now() <= 0) {
-        $(".hero__sub").textContent = "are married!";
+        $(".hero__sub").textContent = t("married", "are married!");
         return;
       }
       setTimeout(render, 1000 - (Date.now() % 1000));
@@ -141,9 +199,13 @@
   function initCalendar() {
     const start = new Date(W.weekendStart);
     const end = new Date(W.weekendEnd);
-    const title = `Wedding weekend: ${W.partner1} & ${W.partner2}`;
+    const title = lang === "af"
+      ? `Trounaweek: ${W.partner1} & ${W.partner2}`
+      : `Wedding weekend: ${W.partner1} & ${W.partner2}`;
     const place = `${W.venue.name}, ${W.venue.address}`;
-    const details = `Save the weekend! ${W.partner1} and ${W.partner2} are getting married on Saturday 14 August 2027 at ${W.venue.name}. Arrive Friday, leave Sunday. Formal invitation and RSVP to follow.`;
+    const details = lang === "af"
+      ? `Hou die naweek oop! ${W.partner1} en ${W.partner2} trou op Saterdag 14 Augustus 2027 by ${W.venue.name}. Kom Vrydag aan, vertrek Sondag. Die formele uitnodiging en RSVP volg.`
+      : `Save the weekend! ${W.partner1} and ${W.partner2} are getting married on Saturday 14 August 2027 at ${W.venue.name}. Arrive Friday, leave Sunday. Formal invitation and RSVP to follow.`;
     const stamp = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
 
     $("#calGoogle").href =
@@ -165,7 +227,7 @@
         `DTSTART:${stamp(start)}`, `DTEND:${stamp(end)}`,
         `SUMMARY:${esc(title)}`, `LOCATION:${esc(place)}`, `DESCRIPTION:${esc(details)}`,
         `GEO:${W.venue.lat};${W.venue.lng}`,
-        "BEGIN:VALARM", "TRIGGER:-P30D", "ACTION:DISPLAY", "DESCRIPTION:Wedding weekend in a month!", "END:VALARM",
+        "BEGIN:VALARM", "TRIGGER:-P30D", "ACTION:DISPLAY", `DESCRIPTION:${t("reminder", "Wedding weekend in a month!")}`, "END:VALARM",
         "END:VEVENT", "END:VCALENDAR",
       ].join("\r\n");
       const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
@@ -199,6 +261,7 @@
     $$("[data-reveal]").forEach((el) => io.observe(el));
   }
 
+  applyLanguage();
   applyConfig();
   initIntro();
   initLeaves();

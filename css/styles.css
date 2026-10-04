@@ -201,7 +201,9 @@ button { font: inherit; cursor: pointer; }
   /* A dark, quiet stage for the letter, whatever the site theme */
   --gold: #c9a45c;
   --gold-light: #ecd9a6;
-  position: fixed; inset: 0; z-index: 100;
+  position: fixed; inset: 0 auto 0 0; z-index: 100;
+  width: 100vw; /* the full window, scrollbar included, so it doesn't shift sideways when
+                   scrolling unlocks at the end and the scrollbar appears */
   display: grid; place-items: center;
   color: var(--on-dark);
   background: radial-gradient(ellipse 70% 62% at 50% 46%, #25314f 0%, #141b30 48%, #090d19 100%);
@@ -292,7 +294,8 @@ button { font: inherit; cursor: pointer; }
   z-index: 0;
 }
 
-/* The card: heavy cotton paper, gold-foil frame and corners */
+/* The card: heavy cotton paper. Apart from the names (merlot), its text, frame and corners
+   are printed in the navy of the landing page behind it. */
 .envelope__card {
   left: 5%; right: 5%; top: 5%; bottom: 5%;
   z-index: 2;
@@ -306,10 +309,10 @@ button { font: inherit; cursor: pointer; }
   box-shadow: 0 1px 2px rgba(0,0,0,.1), 0 16px 28px -16px rgba(0,0,0,.4);
   transition: transform 1.8s cubic-bezier(0.45, 0, 0.2, 1), box-shadow 1.2s;
 }
-.envelope__card::before { /* double gold keyline */
+.envelope__card::before { /* double navy keyline */
   content: ""; position: absolute; inset: 2.2cqi;
-  border: 1px solid color-mix(in srgb, var(--gold) 85%, transparent);
-  box-shadow: inset 0 0 0 3px #fcf5e8, inset 0 0 0 4px color-mix(in srgb, var(--gold) 50%, transparent);
+  border: 1px solid color-mix(in srgb, var(--dark) 85%, transparent);
+  box-shadow: inset 0 0 0 3px #fcf5e8, inset 0 0 0 4px color-mix(in srgb, var(--dark) 45%, transparent);
   pointer-events: none;
 }
 .envelope__card::after { /* a sheen that sweeps across once the card is presented */
@@ -319,24 +322,22 @@ button { font: inherit; cursor: pointer; }
 }
 .envelope__card > span { display: block; }
 .envelope__card-corners { position: absolute; inset: 3.3cqi; pointer-events: none; }
-.envelope__card-corners svg { position: absolute; width: 7cqi; height: 7cqi; color: var(--gold); }
+.envelope__card-corners svg { position: absolute; width: 7cqi; height: 7cqi; color: var(--dark); }
 .envelope__card-corners svg:nth-child(1) { left: 0; top: 0; }
 .envelope__card-corners svg:nth-child(2) { right: 0; top: 0; transform: scaleX(-1); }
 .envelope__card-corners svg:nth-child(3) { left: 0; bottom: 0; transform: scaleY(-1); }
 .envelope__card-corners svg:nth-child(4) { right: 0; bottom: 0; transform: scale(-1); }
-.envelope__card-small { font-size: max(0.5rem, 1.55cqi); letter-spacing: 0.38em; text-transform: uppercase; color: var(--leaf); }
+.envelope__card-small { font-size: max(0.5rem, 1.55cqi); letter-spacing: 0.38em; text-transform: uppercase; color: var(--dark); }
 .envelope__card-title {
   font-weight: 500;
-  color: #a17d3c;
-  background: linear-gradient(100deg, #8a6a2f, #b08a45 35%, #d2b06a 50%, #b08a45 65%, #8a6a2f); -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--dark);
   margin-bottom: 0.8cqi;
 }
 .envelope__card-names { font-family: var(--script); font-size: 7cqi; line-height: 1.12; color: #7a2334; margin: 0.2em 0; }
 .envelope__card-names > span { display: block; }
-.envelope__card-amp { font-family: var(--serif); font-style: italic; font-size: 0.62em; line-height: 1; color: var(--gold); }
+.envelope__card-amp { font-family: var(--serif); font-style: italic; font-size: 0.62em; line-height: 1; color: var(--dark); }
 .envelope__card-sprig { width: 15cqi; height: 3cqi; color: var(--leaf); margin: 0.2rem 0 0.35rem; }
-.envelope__card-place { font-family: var(--serif); font-style: italic; font-size: max(0.8rem, 2.5cqi); color: var(--muted); margin-top: 0.1rem; }
+.envelope__card-place { font-family: var(--serif); font-style: italic; font-size: max(0.8rem, 2.5cqi); color: var(--dark-soft); margin-top: 0.1rem; }
 
 /* Outside: an old letter. The parchment — stains, creases, torn edges — is painted
    by tools/envelope/ into two images whose transparency gives each piece its shape. */
@@ -463,7 +464,9 @@ button { font: inherit; cursor: pointer; }
   opacity: 0;
   transition: opacity 0.9s ease;
 }
-.intro.is-out .envelope__flap { opacity: 0; transition: opacity 0.6s ease; }
+/* Fade the flap's faces rather than the flap: opacity on a preserve-3d element flattens it,
+   and for a moment it shows its outside — and the seal's top half — upside down */
+.intro.is-out .envelope__flap > * { opacity: 0; transition: opacity 0.6s ease; }
 .intro.is-out .envelope__card {
   transform: translateY(-14%) scale(1.14);
   transition: transform 1.3s cubic-bezier(0.45, 0, 0.2, 1), box-shadow 1.3s;
